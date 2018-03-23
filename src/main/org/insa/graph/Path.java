@@ -242,12 +242,8 @@ public class Path {
      */
     public double getMinimumTravelTime() {
     	double temps = 0;
-    	double vitesseConvertie;
-    	float longueurArc;
     	for (Arc myArc : this.arcs) {
-    		vitesseConvertie=(myArc.getRoadInformation()).getMaximumSpeed() * (1000/3600); // vitesse en m/s
-    		longueurArc= myArc.getLength();
-    		temps += longueurArc / vitesseConvertie;
+    		temps += myArc.getMinimumTravelTime();
     	}
         return temps;
     }
