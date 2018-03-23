@@ -218,7 +218,6 @@ public class Path {
      * 
      * @return Total length of the path (in meters).
      * 
-     * @deprecated Need to be implemented.
      */
     public float getLength() {
     	int TotalLength=0;
@@ -250,11 +249,13 @@ public class Path {
      * 
      * @return Minimum travel time to travel this path (in seconds).
      * 
-     * @deprecated Need to be implemented.
      */
     public double getMinimumTravelTime() {
-        // TODO:
-        return 0;
+    	double temps = 0;
+    	for (Arc myArc : this.arcs) {
+    		temps += myArc.getMinimumTravelTime();
+    	}
+        return temps;
     }
 
 }
