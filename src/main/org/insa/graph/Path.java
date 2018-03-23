@@ -192,12 +192,25 @@ public class Path {
      * </ul>
      * 
      * @return true if the path is valid, false otherwise.
-     * 
-     * @deprecated Need to be implemented.
      */
     public boolean isValid() {
-        // TODO:
-        return false;
+    	if (this.isEmpty()) {
+    		return true;
+    	}
+    	else if (this.size() == 1) {
+    		return true;
+    	}
+    	else {
+    		Node origine = this.getOrigin();
+    		 			
+    		for (Arc arc : this.arcs) {
+    			if (!arc.equals(origine)) {
+    				return false;
+    			}
+    			origine = arc.getDestination();
+    		} 			
+    	}
+        return true;
     }
 
     /**
@@ -222,11 +235,8 @@ public class Path {
      * 
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
-     * 
-     * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
-        // TODO:
     	double temps = 0;
     	double vitesseConvertie = speed * (1000/3600); // vitesse en m/s
     	float longueur = getLength();
