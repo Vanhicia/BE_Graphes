@@ -227,7 +227,11 @@ public class Path {
      */
     public double getTravelTime(double speed) {
         // TODO:
-        return 0;
+    	double temps = 0;
+    	double vitesseConvertie = speed * (1000/3600); // vitesse en m/s
+    	float longueur = getLength();
+    	temps = longueur / vitesseConvertie;
+        return temps;
     }
 
     /**
