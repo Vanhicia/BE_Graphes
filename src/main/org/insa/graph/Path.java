@@ -278,15 +278,17 @@ public class Path {
      * @return true if the path is valid, false otherwise.
      */
     public boolean isValid() {
+    	/* Le chemin est vide */
     	if (this.isEmpty()) {
     		return true;
     	}
+    	/* Le chemin contient un seul noeud */
     	else if (this.size() == 1) {
     		return true;
     	}
+    	/* Le chemin contient au moins deux noeuds */
     	else {
     		Node origine = this.getOrigin();
-    		 			
     		for (Arc arc : this.arcs) {
     			if (!origine.equals(arc.getOrigin())) {
     				return false;
