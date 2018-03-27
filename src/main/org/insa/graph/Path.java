@@ -304,7 +304,7 @@ public class Path {
      * 
      */
     public float getLength() {
-    	int TotalLength=0;
+    	float TotalLength = (float)0.0;
     	for (Arc myArc : this.arcs) {
     		TotalLength+=myArc.getLength();
     	}
