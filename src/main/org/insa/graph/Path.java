@@ -236,8 +236,8 @@ public class Path {
      *         kilometers-per-hour).
      */
     public double getTravelTime(double speed) {
-    	double temps = 0;
-    	double vitesseConvertie = speed * (1000/3600); // vitesse en m/s
+    	double temps = 0.0;
+    	double vitesseConvertie = speed * (1000.0/3600.0); // vitesse en m/s
     	float longueur = getLength();
     	temps = longueur / vitesseConvertie;
         return temps;
