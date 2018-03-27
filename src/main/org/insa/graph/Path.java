@@ -25,13 +25,55 @@ public class Path {
      * 
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
-     * 
-     * @deprecated Need to be implemented.
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+  			int k = 0;
+  			Arc arc_rapide = null;
+  			
+  			// Teste s'il y a au moins deux noeuds
+  			if (nodes.size() >= 2) {
+  	
+  				Iterator<Node> nodeIte = nodes.iterator();
+  				Node origine = nodeIte.next();
+  	
+  				/* Parcours des noeuds */
+  				while (nodeIte.hasNext()) {
+  					Node destination = nodeIte.next();
+  	
+  					/* Parcours des arcs dont le noeud est l'origine */
+  					Iterator<Arc> arcIter = origine.iterator();
+  					
+  					while (arcIter.hasNext()) {
+  						Arc arc = arcIter.next();
+  						// Teste si l'arc mene bien au noeud souhaite
+  						if (arc.getDestination() == destination) {
+  							/*
+  							 * Si c'est le premier arc que l'on considere, 
+  							 * on initialise arc_rapide avec cet arc
+  							 */
+  							if (k == 0) {
+  								arc_rapide = arc;
+  								k = 1;
+  							}
+  							/* Sinon on regarde, si l'arc est plus rapide */
+  							else if (arc.getMinimumTravelTime() < arc_rapide.getMinimumTravelTime()) {
+  								arc_rapide = arc;
+  							}
+  						}
+  					}
+  					/* Si on n'a pas retenu d'arc, c'est que la liste de noeuds n'est pas valide */
+  					if (arc_rapide == null) {
+  						throw new IllegalArgumentException();
+  					}
+  					/* Sinon, on ajoute l'arc le plus rapide */
+  					else {
+  						arcs.add(arc_rapide);
+  						origine = destination;
+  					}
+  				}
+  			}
         return new Path(graph, arcs);
     }
 
@@ -51,6 +93,7 @@ public class Path {
 			List<Arc> arcs = new ArrayList<Arc>();
 			int k = 0;
 			Arc arc_court = null;
+			
 			// Teste s'il y a au moins deux noeuds
 			if (nodes.size() >= 2) {
 	
