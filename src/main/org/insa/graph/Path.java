@@ -48,7 +48,7 @@ public class Path {
   					while (arcIter.hasNext()) {
   						Arc arc = arcIter.next();
   						// Teste si l'arc mene bien au noeud souhaite
-  						if (arc.getDestination() == destination) {
+  						if (arc.getDestination().equals(destination)) {
   							/*
   							 * Si c'est le premier arc que l'on considere, 
   							 * on initialise arc_rapide avec cet arc
@@ -110,7 +110,7 @@ public class Path {
 					while (arcIter.hasNext()) {
 						Arc arc = arcIter.next();
 						// Teste si l'arc mene bien au noeud souhaite
-						if (arc.getDestination() == destination) {
+						if (arc.getDestination().equals(destination)) {
 							/*
 							 * Si c'est le premier arc que l'on considere, 
 							 * on initialise arc_court avec cet arc
