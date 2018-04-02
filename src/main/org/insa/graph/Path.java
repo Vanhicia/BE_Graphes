@@ -323,11 +323,11 @@ public class Path {
      * 
      */
     public float getLength() {
-    	float TotalLength = (float)0.0;
+    	float totalLength = 0.0f;
     	for (Arc myArc : this.arcs) {
-    		TotalLength+=myArc.getLength();
+    		totalLength += myArc.getLength();
     	}
-        return TotalLength;
+        return totalLength;
     }
 
     /**
