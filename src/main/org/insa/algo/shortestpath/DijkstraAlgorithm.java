@@ -1,8 +1,9 @@
 package org.insa.algo.shortestpath;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
+import org.insa.algo.AbstractSolution.Status;
 import org.insa.algo.utils.*;
 import org.insa.graph.*;
 
@@ -15,9 +16,11 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     @Override
     protected ShortestPathSolution doRun() {
       	int nbmarques = 0;
-      	int tailleGraphe = data.getGraph().size();
+      	boolean fin = false;
+      	ShortestPathData data = getInputData();
+      	Graph graph = data.getGraph();
+      	int tailleGraphe = graph.size();
       	
-        ShortestPathData data = getInputData();
         ShortestPathSolution solution = null;
         
         /* Tableau de Labels */
@@ -26,9 +29,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         /* Tas de Labels */
         BinaryHeap<Label> tas = new BinaryHeap<Label>();
-        
-        /* Tableau de Nodes dans l'ordre de marquage */
-        Label tabLabelsSolution[] = new Label [data.getGraph().size()];
+                
+        /* Tableau des prédecesseurs */
+     	Arc[] predecessorArcs = new Arc[tailleGraphe];
+
         
         /* Ajout du sommet de départ */
         Label deb = new Label(data.getOrigin());
@@ -36,17 +40,31 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         tas.insert(deb);
         deb.setInTas();
         
+        /* Notifie les observateurs du premier évènement (départ de l'origine) */
+     	notifyOriginProcessed(data.getOrigin());
+        
         /* Tant qu'il existe des sommets non marqués */
-        while(nbmarques < tailleGraphe){
-        	boolean labelTrouve = false ;
+        while(!tas.isEmpty() && !fin){      	
+			
         	Label current= tas.deleteMin();
+        	/* On indique aux observateurs que le Node a été marqué */
+        	notifyNodeMarked(current.getNode());
         	current.setMark();
-        	tabLabelsSolution[nbmarques] = current;
         	nbmarques++;
+        	/* Quand on a atteint la destination, on s'arrête */
+        	if (current.getNode() == data.getDestination()) {
+        		fin = true;
+        	}
         	/* Parcours des successeurs du sommet courant */
         	Iterator<Arc> arc = current.getNode().iterator();
         	while (arc.hasNext()) {
         		Arc arcIter = arc.next();
+        		
+        		// On vérifie que l'on peut réellement prendre cet arc
+    			if (!data.isAllowed(arcIter)) {
+    				continue;
+    			}
+        		
         		Node successeur = arcIter.getDestination();
         		
         		/* On recupere le label correspondant au noeud dans le tableau de labels */
@@ -55,7 +73,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         		/* Si le label n'existe pas encore*/
         		/* Alors on le crée */
         		if (successeurLabel == null) {
-        			successeurLabel = new Label(data.getOrigin());
+        			/* On informe les observateurs que l'on atteint un Node pour la première fois */
+        			notifyNodeReached(arcIter.getDestination());
+        			successeurLabel = new Label(successeur);
         	        tabLabels[successeurLabel.getNode().getId()] = successeurLabel;
         		}
         		
@@ -63,6 +83,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         		if (!successeurLabel.getMark()) {
         			/* Si on obtient un meilleur coût */
         			/* Alors on le met à jour */
+        			
         			if((successeurLabel.getCost()>current.getCost()+arcIter.getLength())|| (successeurLabel.getCost()==-1.0f)){
         				successeurLabel.setCost(current.getCost()+arcIter.getLength());
         				successeurLabel.setFather(current.getNode());
@@ -76,18 +97,37 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         					successeurLabel.setInTas();
         				}
         				tas.insert(successeurLabel);
+        				predecessorArcs[arcIter.getDestination().getId()] = arcIter;
         			}
         		}
         		
         	}
         }
-        List<Arc> arcs = new ArrayList<Arc>();
-        for (Label label : tabLabelsSolution) {
-        	Node father = label.getFather();
-        	if (father != null) {
-        		
-        	}
-        }
+        
+        // Destination has no predecessor, the solution is infeasible...
+		if (predecessorArcs[data.getDestination().getId()] == null) {
+			solution = new ShortestPathSolution(data, Status.INFEASIBLE);
+		} else {
+
+			// The destination has been found, notify the observers.
+			notifyDestinationReached(data.getDestination());
+	     
+			// Create the path from the array of predecessors...
+			ArrayList<Arc> arcs = new ArrayList<>();
+			Arc arc = predecessorArcs[data.getDestination().getId()];
+			
+			while (arc != null) {
+				arcs.add(arc);
+				arc = predecessorArcs[arc.getOrigin().getId()];
+			}
+	        
+			// Reverse the path...
+			Collections.reverse(arcs);
+	        
+			// Create the final solution.
+			solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
+		   
+		}
 
         return solution;
     }
