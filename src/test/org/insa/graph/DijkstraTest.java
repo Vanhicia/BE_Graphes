@@ -8,8 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+import org.insa.algo.ArcInspector;
+import org.insa.algo.shortestpath.BellmanFordAlgorithm;
+import org.insa.algo.shortestpath.DijkstraAlgorithm;
+import org.insa.algo.shortestpath.ShortestPathData;
+import org.insa.algo.shortestpath.ShortestPathSolution;
 import org.insa.graph.RoadInformation.RoadType;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -61,13 +66,54 @@ public class DijkstraTest {
     }
 
     @Test
-    public void testConstructor() {
-    	
-    }
-
-    @Test
     public void testDoRun() {
-        
+    	
+    	/* Tableau contenant les arcs*/
+    	//Arc[] arcs = new Arc[] { a2b, a2c, b2d, b2e, b2f, c2a, c2b, c2f, e2c, e2d, e2f, f2e };
+    	
+    	for (int i=0;  i < nodes.length; ++i) {
+    		
+    		/* Affichage du point de départ */
+    		System.out.print("x"+nodes[i].getId() + ":");
+    		
+    		for (int j=0;  j < nodes.length; ++j) {
+    			
+    			if(nodes[i]==nodes[j]) {
+    				System.out.print(" - ");
+    			}
+    			else{
+    			
+    			// TODO : Trouver un moyen d'initialiser un ArcInspector 
+    			ShortestPathData data = new ShortestPathData(graph, nodes[i],nodes[j], ArcInspector);
+    	
+    			
+    			BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
+    			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
+    			
+    			/* Récupération des solutions de Bellman et Dijkstra pour comparer */
+    			ShortestPathSolution solution = D.run();
+    			ShortestPathSolution expected = B.run();
+    			assertEquals(expected,solution);
+    			
+    			/* Calcul du coût de la solution */
+    			int cost=0;
+    			Node OriginOfLastArc;
+    			for (Arc arc: solution.getPath().getArcs()) {
+    				cost+=solution.getInputData().getCost(arc);
+    				
+    				// TODO : Trouver un moyen d'optimiser la recherche du sommet père du Dest
+    				OriginOfLastArc=arc.getOrigin();
+    			}
+    			
+    			/* Affiche le couple (coût, sommet père du Dest) */
+    			System.out.print("("+cost+ "," + OriginOfLastArc.getId() + ") ");
+    			
+    			}
+    		}
+    		
+    		/* Retour à la ligne */ 
+    		System.out.println("");
+    	}
     }
 
 }
