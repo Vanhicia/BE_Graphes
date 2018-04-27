@@ -1,18 +1,20 @@
-package org.insa.graph;
+package org.insa.algo.shortestpath;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-import org.insa.algo.ArcInspector;
 import org.insa.algo.shortestpath.BellmanFordAlgorithm;
 import org.insa.algo.shortestpath.DijkstraAlgorithm;
 import org.insa.algo.shortestpath.ShortestPathData;
 import org.insa.algo.shortestpath.ShortestPathSolution;
+import org.insa.algo.utils.ArcInspectorDijkstra;
+import org.insa.graph.Arc;
+import org.insa.graph.Graph;
+import org.insa.graph.Node;
+import org.insa.graph.RoadInformation;
 import org.insa.graph.RoadInformation.RoadType;
 
 import org.junit.BeforeClass;
@@ -29,10 +31,6 @@ public class DijkstraTest {
     // List of arcs in the graph, a2b is the arc from node A (0) to B (1).
     @SuppressWarnings("unused")
     private static Arc a2b, a2c, b2d, b2e, b2f, c2a, c2b, c2f, e2c, e2d, e2f, f2e;
-
-    // Some paths...
-   /* private static Path emptyPath, singleNodePath, shortPath, longPath, loopPath, longLoopPath,
-            invalidPath;*/
 
     @BeforeClass
     public static void initAll() throws IOException {
@@ -74,40 +72,45 @@ public class DijkstraTest {
     	for (int i=0;  i < nodes.length; ++i) {
     		
     		/* Affichage du point de départ */
-    		System.out.print("x"+nodes[i].getId() + ":");
+    		System.out.print("x"+(nodes[i].getId()+1) + ":");
     		
     		for (int j=0;  j < nodes.length; ++j) {
     			
     			if(nodes[i]==nodes[j]) {
-    				System.out.print(" - ");
+    				System.out.print("- ");
     			}
     			else{
     			
-    			// TODO : Trouver un moyen d'initialiser un ArcInspector 
-    			ShortestPathData data = new ShortestPathData(graph, nodes[i],nodes[j], ArcInspector);
-    	
-    			
-    			BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
-    			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
-    			
-    			/* Récupération des solutions de Bellman et Dijkstra pour comparer */
-    			ShortestPathSolution solution = D.run();
-    			ShortestPathSolution expected = B.run();
-    			assertEquals(expected,solution);
-    			
-    			/* Calcul du coût de la solution */
-    			int cost=0;
-    			Node OriginOfLastArc;
-    			for (Arc arc: solution.getPath().getArcs()) {
-    				cost+=solution.getInputData().getCost(arc);
-    				
-    				// TODO : Trouver un moyen d'optimiser la recherche du sommet père du Dest
-    				OriginOfLastArc=arc.getOrigin();
-    			}
-    			
-    			/* Affiche le couple (coût, sommet père du Dest) */
-    			System.out.print("("+cost+ "," + OriginOfLastArc.getId() + ") ");
-    			
+	    			ArcInspectorDijkstra arcInspectorDijkstra = new ArcInspectorDijkstra();
+	    			ShortestPathData data = new ShortestPathData(graph, nodes[i],nodes[j], arcInspectorDijkstra);
+	    	
+	    			BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
+	    			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
+	    			
+	    			/* Récupération des solutions de Bellman et Dijkstra pour comparer */
+	    			ShortestPathSolution solution = D.run();
+	    			ShortestPathSolution expected = B.run();
+	    			
+	    			/* Pas de chemin trouvé */
+	    			if (solution.getPath() == null) {
+	    				assertEquals(expected.getPath(), solution.getPath());
+	    				System.out.print("(infini) ");
+	    			}
+	    			/* Un plus court chemin trouvé */
+	    			else {
+	    			
+		    			/* Calcul du coût de la solution */
+		    			float costSolution = solution.getPath().getLength();
+		    			float costExpected = expected.getPath().getLength();
+		    			assertEquals(costExpected, costSolution, 0);
+		    			
+		    			/* On récupère l'avant dernier sommet du chemin de la solution (=sommet père de la destination) */
+		    			List<Arc> arcs = solution.getPath().getArcs();
+		    			Node originOfLastArc = arcs.get(arcs.size()-1).getOrigin();
+	    			
+	    			/* Affiche le couple (coût, sommet père du Dest) */
+	    			System.out.print("("+costSolution+ ", x" + (originOfLastArc.getId()+1) + ") ");
+	    			}
     			}
     		}
     		
