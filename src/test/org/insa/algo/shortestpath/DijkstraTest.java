@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.insa.algo.ArcInspector;
+import org.insa.algo.ArcInspectorFactory;
 import org.insa.algo.shortestpath.BellmanFordAlgorithm;
 import org.insa.algo.shortestpath.DijkstraAlgorithm;
 import org.insa.algo.shortestpath.ShortestPathData;
@@ -71,7 +73,7 @@ public class DijkstraTest {
     	
     	for (int i=0;  i < nodes.length; ++i) {
     		
-    		/* Affichage du point de départ */
+    		/* Affichage du point de dï¿½part */
     		System.out.print("x"+(nodes[i].getId()+1) + ":");
     		
     		for (int j=0;  j < nodes.length; ++j) {
@@ -81,42 +83,97 @@ public class DijkstraTest {
     			}
     			else{
     			
-	    			ArcInspectorDijkstra arcInspectorDijkstra = new ArcInspectorDijkstra();
+	    			ArcInspector arcInspectorDijkstra = new ArcInspectorFactory().getAllFilters().get(0);
 	    			ShortestPathData data = new ShortestPathData(graph, nodes[i],nodes[j], arcInspectorDijkstra);
 	    	
 	    			BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
 	    			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
 	    			
-	    			/* Récupération des solutions de Bellman et Dijkstra pour comparer */
+	    			/* Rï¿½cupï¿½ration des solutions de Bellman et Dijkstra pour comparer */
 	    			ShortestPathSolution solution = D.run();
 	    			ShortestPathSolution expected = B.run();
 	    			
-	    			/* Pas de chemin trouvé */
+	    			/* Pas de chemin trouvï¿½ */
 	    			if (solution.getPath() == null) {
 	    				assertEquals(expected.getPath(), solution.getPath());
 	    				System.out.print("(infini) ");
 	    			}
-	    			/* Un plus court chemin trouvé */
+	    			/* Un plus court chemin trouvï¿½ */
 	    			else {
 	    			
-		    			/* Calcul du coût de la solution */
+		    			/* Calcul du coï¿½t de la solution */
 		    			float costSolution = solution.getPath().getLength();
 		    			float costExpected = expected.getPath().getLength();
 		    			assertEquals(costExpected, costSolution, 0);
 		    			
-		    			/* On récupère l'avant dernier sommet du chemin de la solution (=sommet père de la destination) */
+		    			/* On rï¿½cupï¿½re l'avant dernier sommet du chemin de la solution (=sommet pï¿½re de la destination) */
 		    			List<Arc> arcs = solution.getPath().getArcs();
 		    			Node originOfLastArc = arcs.get(arcs.size()-1).getOrigin();
 	    			
-	    			/* Affiche le couple (coût, sommet père du Dest) */
+	    			/* Affiche le couple (coï¿½t, sommet pï¿½re du Dest) */
 	    			System.out.print("("+costSolution+ ", x" + (originOfLastArc.getId()+1) + ") ");
 	    			}
     			}
     		}
     		
-    		/* Retour à la ligne */ 
+    		/* Retour ï¿½ la ligne */ 
     		System.out.println("");
     	}
+    	
+    }
+    
+    @Test
+    public void testDoScenarioDistance() throws Exception {
+       	System.out.println("testDoScenarioDistance");
+    	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
+    	test.testScenario(mapName, 1);
+    	
+    }
+    
+    @Test
+    public void testDoScenarioTemps() throws Exception {
+    	System.out.println("testDoScenarioTemps");
+    	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
+    	test.testScenario(mapName, 0);
+    	
+    }
+    
+    @Test
+    public void testDoScenarioDistance2() throws Exception {
+    	System.out.println("testDoScenarioDistance2");
+    	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
+    	test.testScenario(mapName, 1);
+    	
+    }
+    
+    @Test
+    public void testDoScenarioTemps2() throws Exception {
+    	System.out.println("testDoScenarioTemps2");
+    	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
+    	test.testScenario(mapName, 0);
+    	
+    }
+    
+    @Test
+    public void testDoScenarioMinTempsDist() throws Exception {
+    	System.out.println("testDoScenarioMinTempsDist");
+    	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
+    	test.testScenarioSansOracle(mapName, 1);
+    	
+    }
+    
+    @Test
+    public void testDoScenarioMinDistTemps() throws Exception {
+    	System.out.println("testDoScenarioMinDistTemps");
+    	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
+    	test.testScenarioSansOracle(mapName, 0);
+    	
     }
 
 }
