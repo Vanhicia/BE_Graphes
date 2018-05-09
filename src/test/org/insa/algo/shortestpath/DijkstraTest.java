@@ -125,42 +125,85 @@ public class DijkstraTest {
     @Test
     public void testDoScenarioDistance() throws Exception {
        	System.out.println("testDoScenarioDistance");
+<<<<<<< HEAD
+    	//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+       	String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+       	DijkstraTestWithMap test = new  DijkstraTestWithMap();
+       	test.testScenario(mapName, 1);    	
+=======
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
     	test.testScenario(mapName, 1);
     	
+>>>>>>> 94b7d87d5a6f6479801fd80aba0e22c06ce8d91a
     }
     
     @Test
     public void testDoScenarioTemps() throws Exception {
     	System.out.println("testDoScenarioTemps");
+<<<<<<< HEAD
+    	//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+    	String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap();
+    	test.testScenario(mapName, 0);
+=======
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
     	test.testScenario(mapName, 0);
     	
+>>>>>>> 94b7d87d5a6f6479801fd80aba0e22c06ce8d91a
     }
     
     @Test
     public void testDoScenarioDistance2() throws Exception {
     	System.out.println("testDoScenarioDistance2");
+<<<<<<< HEAD
+    	//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+    	String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap();
+    	test.testScenario(mapName, 1);
+=======
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
     	test.testScenario(mapName, 1);
     	
+>>>>>>> 94b7d87d5a6f6479801fd80aba0e22c06ce8d91a
     }
     
     @Test
     public void testDoScenarioTemps2() throws Exception {
     	System.out.println("testDoScenarioTemps2");
+<<<<<<< HEAD
+    	//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+    	String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap();
+    	test.testScenario(mapName, 0);
+=======
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
     	test.testScenario(mapName, 0);
     	
+>>>>>>> 94b7d87d5a6f6479801fd80aba0e22c06ce8d91a
     }
     
     @Test
     public void testDoScenarioMinTempsDist() throws Exception {
     	System.out.println("testDoScenarioMinTempsDist");
+<<<<<<< HEAD
+    	//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+    	String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap();
+    	test.testScenarioSansOracle(mapName);
+    }
+    
+   @Test
+    public void testDoScenarioMinTempsDist2() throws Exception {
+    	System.out.println("testDoScenarioMinTempsDist2");
+    	//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/midi-pyrenees.mapgr";
+    	String mapName = "C:/Users/Alicia/Desktop/Maps/midi-pyrenees.mapgr";
+    	DijkstraTestWithMap test = new  DijkstraTestWithMap();
+    	test.testScenarioSansOracle(mapName);
+=======
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
     	test.testScenarioSansOracle(mapName, 1);
@@ -174,6 +217,7 @@ public class DijkstraTest {
     	DijkstraTestWithMap test = new  DijkstraTestWithMap ();
     	test.testScenarioSansOracle(mapName, 0);
     	
+>>>>>>> 94b7d87d5a6f6479801fd80aba0e22c06ce8d91a
     }
 
 }
