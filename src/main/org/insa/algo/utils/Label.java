@@ -3,7 +3,7 @@ package org.insa.algo.utils;
 import org.insa.graph.Node;
 
 public class Label implements Comparable<Label> {
-	private float cost;
+	protected float cost;
 	private boolean marked;
 	private Node father;
 	private Node node;
@@ -56,10 +56,10 @@ public class Label implements Comparable<Label> {
 	/* Compare les Labels selon leur coût */
 	public int compareTo(Label autre) {
 		int resultat;
-		if (this.cost < autre.cost) {
+		if (this.getCost() < autre.getCost()) {
 			resultat = -1;
 		}
-		else if (this.cost == autre.cost) {
+		else if (this.getCost() == autre.getCost()) {
 			resultat = 0;
 		}
 		else {
