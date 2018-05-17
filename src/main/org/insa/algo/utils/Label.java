@@ -12,7 +12,7 @@ public class Label implements Comparable<Label> {
 	public Label(Node noeud){
 		this.node = noeud;
 		this.marked = false;
-		this.cost = -1.0f;
+		this.cost = Float.POSITIVE_INFINITY;
 		this.father = null; 
 		this.inTas = false;
 	}

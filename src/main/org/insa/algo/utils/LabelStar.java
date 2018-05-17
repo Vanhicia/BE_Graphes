@@ -24,8 +24,14 @@ public class LabelStar extends Label implements Comparable<Label>{
 		}
 	}
 
-	public float getCostEstimate() {
+	public float getCost() {
+		System.out.println("getCostStar !!!!!!!!!!!!!!\n");
 		return this.inf+this.cost;
+	}
+	
+	public float getCostReal() {
+		System.out.println("getCostReal !!!!!!!!!!!!!!\n");
+		return this.cost;
 	}
 
 

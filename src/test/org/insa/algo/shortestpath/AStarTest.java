@@ -125,8 +125,8 @@ public class AStarTest {
 	public void testDoScenarioDistance() throws Exception {
 		System.out.println("testDoScenarioDistance");
 		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
-		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+		String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
 		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenario(mapName, 1);    	
 
@@ -136,8 +136,8 @@ public class AStarTest {
 	public void testDoScenarioDistance1() throws Exception {
 		System.out.println("testDoScenarioDistance");
 		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
-		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+		String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
 		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenario(mapName, 1);    	
 
@@ -147,8 +147,8 @@ public class AStarTest {
 	public void testDoScenarioTemps() throws Exception {
 		System.out.println("testDoScenarioTemps");
 		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
-		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+		String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
 		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenario(mapName, 0);
 	}

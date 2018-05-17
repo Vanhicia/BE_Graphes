@@ -15,133 +15,137 @@ import org.insa.graph.Path;
 
 public class AStarAlgorithm extends DijkstraAlgorithm {
 
-    public AStarAlgorithm(ShortestPathData data) {
-        super(data);
-    }
+	public AStarAlgorithm(ShortestPathData data) {
+		super(data);
+	}
 
-    @Override
-    protected ShortestPathSolution doRun() {
-      	boolean fin = false;
-      	ShortestPathData data = getInputData();
-      	Graph graph = data.getGraph();
-      	int tailleGraphe = graph.size();
-      	
-        ShortestPathSolution solution = null;
-        
-        /* Tableau de Labels */
-        /* Les Labels sont placés selon leur Id */
-        Label tabLabels[] = new Label [tailleGraphe];
+	@Override
+	protected ShortestPathSolution doRun() {
+		boolean fin = false;
+		ShortestPathData data = getInputData();
+		Graph graph = data.getGraph();
+		int tailleGraphe = graph.size();
 
-        /* Tas de Labels */
-        BinaryHeap<Label> tas = new BinaryHeap<Label>();
-                
-        /* Tableau des prédecesseurs */
-     	Arc[] predecessorArcs = new Arc[tailleGraphe];
+		ShortestPathSolution solution = null;
 
-        
-        /* Ajout du sommet de départ */
-     	LabelStar deb = new LabelStar(data.getOrigin(), data);
-        tabLabels[deb.getNode().getId()] = deb;
-        tas.insert(deb);
-        deb.setInTas();
-        
-        /* Notifie les observateurs du premier évènement (départ de l'origine) */
-     	notifyOriginProcessed(data.getOrigin());
-        
-        /* Tant qu'il existe des sommets non marqués */
-        while(!tas.isEmpty() && !fin){  
-        	System.out.println("dans la boucle while");
+		/* Tableau de Labels */
+		/* Les Labels sont placés selon leur Id */
+		LabelStar tabLabels[] = new LabelStar [tailleGraphe];
+
+		/* Tas de Labels */
+		BinaryHeap<Label> tas = new BinaryHeap<Label>();
+
+		/* Tableau des prédecesseurs */
+		Arc[] predecessorArcs = new Arc[tailleGraphe];
+
+
+		/* Ajout du sommet de départ */
+		LabelStar deb = new LabelStar(data.getOrigin(), data);
+		tabLabels[deb.getNode().getId()] = deb;
+		tas.insert(deb);
+		deb.setInTas();
+		deb.setCost(0);
+
+		/* Notifie les observateurs du premier évènement (départ de l'origine) */
+		notifyOriginProcessed(data.getOrigin());
+
+		/* Tant qu'il existe des sommets non marqués */
+		while(!tas.isEmpty() && !fin){  
+			System.out.println("dans la boucle while");
+
+			Label current= tas.deleteMin();
+			/* On indique aux observateurs que le Node a été marqué */
+			notifyNodeMarked(current.getNode());
+			current.setMark();
 			
-        	Label current= tas.deleteMin();
-        	/* On indique aux observateurs que le Node a été marqué */
-        	notifyNodeMarked(current.getNode());
-        	LabelStar currentStar = new LabelStar(current.getNode(),data);
-        	current.setMark();
-        	/* Quand on a atteint la destination, on s'arrête */
-        	if (current.getNode() == data.getDestination()) {
-        		fin = true;
-        	}
-        	/* Parcours des successeurs du sommet courant */
-        	Iterator<Arc> arc = current.getNode().iterator();
-        	while (arc.hasNext()) {
-        		Arc arcIter = arc.next();
-        		
-        		// On vérifie que l'on peut réellement prendre cet arc
-    			if (!data.isAllowed(arcIter)) {
-    				continue;
-    			}
-        		
-        		Node successeur = arcIter.getDestination();
-              	System.out.println("dans la boucle while 2");
-        		/* On recupere le label correspondant au noeud dans le tableau de labels */
-        		Label successeurLabel = tabLabels[successeur.getId()];
-        		
-        		/* Si le label n'existe pas encore*/
-        		/* Alors on le crée */
-        		if (successeurLabel == null) {
-        			/* On informe les observateurs que l'on atteint un Node pour la première fois */
-        			notifyNodeReached(arcIter.getDestination());
-        			successeurLabel = new LabelStar(successeur, data);
-        	        tabLabels[successeurLabel.getNode().getId()] = successeurLabel;
-        	      	System.out.println("on atteint un Node pour la premiere fois");
-        		}
-        		
-        		/* Si le successeur n'est pas encore marqué */
-        		if (!successeurLabel.getMark()) {
-        			/* Si on obtient un meilleur coût */
-        			/* Alors on le met à jour */
-        			
+			LabelStar currentStar = new LabelStar(current.getNode(),data);
+			currentStar.setCost(current.getCost());
+			
+			/* Quand on a atteint la destination, on s'arrête */
+			if (current.getNode() == data.getDestination()) {
+				fin = true;
+			}
+			/* Parcours des successeurs du sommet courant */
+			Iterator<Arc> arc = current.getNode().iterator();
+			while (arc.hasNext()) {
+				Arc arcIter = arc.next();
 
-          	      System.out.println("cout successeurLabel.getCost() = " +successeurLabel.getCost());
-          	      System.out.println("cout current.getCost()+(float)data.getCost(arcIter) = " +(currentStar.getCost()+data.getCost(arcIter)));
-        			if((successeurLabel.getCost()>currentStar.getCost()+data.getCost(arcIter))|| (successeurLabel.getCost()==-1.0f)){
-        				System.out.println("cout 1 = " +(currentStar.getCost()+data.getCost(arcIter)));
-        				successeurLabel.setCost(current.getCost()+(float)data.getCost(arcIter)+1.0f);
-              	      	System.out.println("la ????????");
-        				successeurLabel.setFather(current.getNode());
-        				/* Si le label est déjà dans le tas */
-        				/* Alors on met à jour sa position dans le tas */
-        				if(successeurLabel.getInTas()) {
-        					tas.remove(successeurLabel);
-        				}
-        				/* Sinon on l'ajoute dans le tas */
-        				else {
-        					successeurLabel.setInTas();
-        				}
-        				tas.insert(successeurLabel);
-        				predecessorArcs[arcIter.getDestination().getId()] = arcIter;
-        			}
-        		}
-        		
-        	}
-        }
-        
-        // Destination has no predecessor, the solution is infeasible...
+				// On vérifie que l'on peut réellement prendre cet arc
+				if (!data.isAllowed(arcIter)) {
+					continue;
+				}
+
+				Node successeur = arcIter.getDestination();
+				System.out.println("dans la boucle while 2");
+				/* On recupere le label correspondant au noeud dans le tableau de labels */
+				LabelStar successeurLabel = tabLabels[successeur.getId()];
+
+				/* Si le label n'existe pas encore*/
+				/* Alors on le crée */
+				if (successeurLabel == null) {
+					/* On informe les observateurs que l'on atteint un Node pour la première fois */
+					notifyNodeReached(arcIter.getDestination());
+					successeurLabel = new LabelStar(successeur, data);
+					tabLabels[successeurLabel.getNode().getId()] = successeurLabel;
+					System.out.println("on atteint un Node pour la premiere fois");
+				}
+
+				/* Si le successeur n'est pas encore marqué */
+				if (!successeurLabel.getMark()) {
+					/* Si on obtient un meilleur coût */
+					/* Alors on le met à jour */
+
+
+					System.out.println("cout successeurLabel.getCost() = " +successeurLabel.getCost());
+					System.out.println("cout current.getCost()+(float)data.getCost(arcIter) = " +(currentStar.getCost()+data.getCost(arcIter)));
+					if((successeurLabel.getCostReal()>currentStar.getCostReal()+data.getCost(arcIter))|| (successeurLabel.getCost()==Float.POSITIVE_INFINITY)){
+						System.out.println("cout 1 = " +(currentStar.getCost()+data.getCost(arcIter)));
+						successeurLabel.setCost(currentStar.getCostReal()+(float)data.getCost(arcIter));
+						System.out.println("la ????????");
+						successeurLabel.setFather(current.getNode());
+						/* Si le label est déjà dans le tas */
+						/* Alors on met à jour sa position dans le tas */
+						if(successeurLabel.getInTas()) {
+							tas.remove(successeurLabel);
+						}
+						/* Sinon on l'ajoute dans le tas */
+						else {
+							successeurLabel.setInTas();
+						}
+						tas.insert(successeurLabel);
+						predecessorArcs[arcIter.getDestination().getId()] = arcIter;
+					}
+				}
+
+			}
+		}
+
+		// Destination has no predecessor, the solution is infeasible...
 		if (predecessorArcs[data.getDestination().getId()] == null) {
 			solution = new ShortestPathSolution(data, Status.INFEASIBLE);
 		} else {
 
 			// The destination has been found, notify the observers.
 			notifyDestinationReached(data.getDestination());
-	     
+
 			// Create the path from the array of predecessors...
 			ArrayList<Arc> arcs = new ArrayList<>();
 			Arc arc = predecessorArcs[data.getDestination().getId()];
-			
+
 			while (arc != null) {
 				arcs.add(arc);
 				arc = predecessorArcs[arc.getOrigin().getId()];
 			}
-	        
+
 			// Reverse the path...
 			Collections.reverse(arcs);
-	        
+
 			// Create the final solution.
 			solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
-		   
+
 		}
 
-        return solution;
-    }
+		return solution;
+	}
 
 }

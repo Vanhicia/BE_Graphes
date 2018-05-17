@@ -126,8 +126,6 @@ public class AStarTestWithMap {
 
 		/** Recherche du chemin le plus rapide **/
 
-		System.out.println("type d'evaluation: temps");
-
 		ArcInspector arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
 
 		ShortestPathData data = new ShortestPathData(graph, graph.get(0),graph.get(graph.size()-1), arcInspectorDijkstra);
