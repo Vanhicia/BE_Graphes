@@ -50,17 +50,16 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 		notifyOriginProcessed(data.getOrigin());
 
 		/* Tant qu'il existe des sommets non marqués */
-		while(!tas.isEmpty() && !fin){  
-			System.out.println("dans la boucle while");
+		while(!tas.isEmpty() && !fin){
 
 			Label current= tas.deleteMin();
 			/* On indique aux observateurs que le Node a été marqué */
 			notifyNodeMarked(current.getNode());
 			current.setMark();
-			
+
 			LabelStar currentStar = new LabelStar(current.getNode(),data);
 			currentStar.setCost(current.getCost());
-			
+
 			/* Quand on a atteint la destination, on s'arrête */
 			if (current.getNode() == data.getDestination()) {
 				fin = true;
@@ -76,7 +75,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 				}
 
 				Node successeur = arcIter.getDestination();
-				System.out.println("dans la boucle while 2");
+
 				/* On recupere le label correspondant au noeud dans le tableau de labels */
 				LabelStar successeurLabel = tabLabels[successeur.getId()];
 
@@ -87,7 +86,6 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 					notifyNodeReached(arcIter.getDestination());
 					successeurLabel = new LabelStar(successeur, data);
 					tabLabels[successeurLabel.getNode().getId()] = successeurLabel;
-					System.out.println("on atteint un Node pour la premiere fois");
 				}
 
 				/* Si le successeur n'est pas encore marqué */
@@ -95,13 +93,8 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 					/* Si on obtient un meilleur coût */
 					/* Alors on le met à jour */
 
-
-					System.out.println("cout successeurLabel.getCost() = " +successeurLabel.getCost());
-					System.out.println("cout current.getCost()+(float)data.getCost(arcIter) = " +(currentStar.getCost()+data.getCost(arcIter)));
 					if((successeurLabel.getCostReal()>currentStar.getCostReal()+data.getCost(arcIter))|| (successeurLabel.getCost()==Float.POSITIVE_INFINITY)){
-						System.out.println("cout 1 = " +(currentStar.getCost()+data.getCost(arcIter)));
 						successeurLabel.setCost(currentStar.getCostReal()+(float)data.getCost(arcIter));
-						System.out.println("la ????????");
 						successeurLabel.setFather(current.getNode());
 						/* Si le label est déjà dans le tas */
 						/* Alors on met à jour sa position dans le tas */
