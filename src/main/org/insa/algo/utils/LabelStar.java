@@ -23,9 +23,9 @@ public class LabelStar extends Label implements Comparable<Label>{
 
 		}
 	}
-	@Override
-	public float getCost() {
-		return this.cost+this.inf;
+
+	public float getCostEstimate() {
+		return this.inf+this.cost;
 	}
 
 
