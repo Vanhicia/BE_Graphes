@@ -36,12 +36,12 @@ public class AStarTestWithMap {
 
 			ShortestPathData data = new ShortestPathData(graph, graph.get(0),graph.get(graph.size()-1), arcInspectorDijkstra);
 
-			BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
+			AStarAlgorithm A = new AStarAlgorithm(data);
 			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
 
 			/* Recuperation des solutions de Bellman et Dijkstra pour comparer */
-			ShortestPathSolution solution = D.run();
-			ShortestPathSolution expected = B.run();
+			ShortestPathSolution solution = A.run();
+			ShortestPathSolution expected = D.run();
 
 			System.out.println(mapName);
 			/*System.out.println("origine : " + origine);
@@ -112,10 +112,10 @@ public class AStarTestWithMap {
 	public void testScenarioSansOracle(String mapName) throws Exception {
 		//public void testScenario(String mapName, int typeEvaluation, Node origine, Node destination) throws Exception {
 
-		double costFastestSolutionInTime = -1f;
-		double costFastestSolutionInDistance = -1f;
-		double costShortestSolutionInTime = -1f;
-		double costShortestSolutionInDistance = -1f;
+		double costFastestSolutionInTime = -1.0f;
+		double costFastestSolutionInDistance = -1.0f;
+		double costShortestSolutionInTime = -1.0f;
+		double costShortestSolutionInDistance = -1.0f;
 
 		// Create a graph reader.
 		GraphReader reader = new BinaryGraphReader(

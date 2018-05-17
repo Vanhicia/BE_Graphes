@@ -30,7 +30,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
         
         /* Tableau de Labels */
         /* Les Labels sont placés selon leur Id */
-        LabelStar tabLabels[] = new LabelStar [data.getGraph().size()];
+        LabelStar tabLabels[] = new LabelStar [tailleGraphe];
 
         /* Tas de Labels */
         BinaryHeap<Label> tas = new BinaryHeap<Label>();
@@ -71,7 +71,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
     			}
         		
         		Node successeur = arcIter.getDestination();
-        		
+              	System.out.println("dans la boucle while 2");
         		/* On recupere le label correspondant au noeud dans le tableau de labels */
         		LabelStar successeurLabel = tabLabels[successeur.getId()];
         		
@@ -82,6 +82,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
         			notifyNodeReached(arcIter.getDestination());
         			successeurLabel = new LabelStar(successeur, data);
         	        tabLabels[successeurLabel.getNode().getId()] = successeurLabel;
+        	      	System.out.println("on atteint un Node pour la premiere fois");
         		}
         		
         		/* Si le successeur n'est pas encore marqué */
@@ -89,11 +90,13 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
         			/* Si on obtient un meilleur coût */
         			/* Alors on le met à jour */
         			
-        			
+
+          	      System.out.println("cout successeurLabel.getCost() = " +successeurLabel.getCost());
+          	      System.out.println("cout current.getCost()+(float)data.getCost(arcIter) = " +(current.getCost()+(float)data.getCost(arcIter)));
         			if((successeurLabel.getCost()>current.getCost()+data.getCost(arcIter))|| (successeurLabel.getCost()==-1.0f)){
         				System.out.println("cout 1 = " +current.getCost()+(float)data.getCost(arcIter));
         				successeurLabel.setCost(current.getCost()+(float)data.getCost(arcIter));
-        				
+              	      	System.out.println("la ????????");
         				successeurLabel.setFather(current.getNode());
         				/* Si le label est déjà dans le tas */
         				/* Alors on met à jour sa position dans le tas */

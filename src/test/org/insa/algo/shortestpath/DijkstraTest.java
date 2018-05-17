@@ -127,6 +127,7 @@ public class DijkstraTest {
        	System.out.println("testDoScenarioDistance");
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
         //String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
        	DijkstraTestWithMap test = new  DijkstraTestWithMap();
        	test.testScenario(mapName, 1);    	
 
@@ -137,6 +138,7 @@ public class DijkstraTest {
     	System.out.println("testDoScenarioTemps");
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
     	//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap();
     	test.testScenario(mapName, 0);
     }
@@ -146,6 +148,7 @@ public class DijkstraTest {
     	System.out.println("testDoScenarioDistance2");
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
     	//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
+		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap();
     	test.testScenario(mapName, 1);
     }
@@ -155,6 +158,7 @@ public class DijkstraTest {
     	System.out.println("testDoScenarioTemps2");
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
     	//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
+		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap();
     	test.testScenario(mapName, 0);
     }
@@ -164,6 +168,7 @@ public class DijkstraTest {
     	System.out.println("testDoScenarioMinTempsDist");
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
     	//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap();
     	test.testScenarioSansOracle(mapName);
     }
@@ -173,6 +178,7 @@ public class DijkstraTest {
     	System.out.println("testDoScenarioMinTempsDist2");
     	String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/midi-pyrenees.mapgr";
     	//String mapName = "C:/Users/Alicia/Desktop/Maps/midi-pyrenees.mapgr";
+		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
     	DijkstraTestWithMap test = new  DijkstraTestWithMap();
     	test.testScenarioSansOracle(mapName);
     }

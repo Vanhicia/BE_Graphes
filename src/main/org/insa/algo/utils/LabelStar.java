@@ -13,17 +13,17 @@ public class LabelStar extends Label implements Comparable<Label>{
 		super(noeud);
 		
 		if (data.getMode() == AbstractInputData.Mode.LENGTH) {
-			//this.inf = (float)Point.distance(noeud.getPoint(),data.getDestination().getPoint());
-			this.inf = (float)noeud.getPoint().distanceTo(data.getDestination().getPoint());
+			this.inf = (float)Point.distance(noeud.getPoint(),data.getDestination().getPoint());
+			//this.inf = (float)(noeud.getPoint().distanceTo(data.getDestination().getPoint())));
 		}
 		else {
 			
 			int vitesse = Math.max(data.getMaximumSpeed(), data.getGraph().getGraphInformation().getMaximumSpeed());
-			this.inf = (float)(noeud.getPoint().distanceTo(data.getDestination().getPoint()))/(vitesse*1000.0f/3600.0f);
+			this.inf = (float)Point.distance(noeud.getPoint(),data.getDestination().getPoint())/(vitesse*1000.0f/3600.0f);
 
 		}
 	}
-
+	@Override
 	public float getCost() {
 		return this.cost+this.inf;
 	}
