@@ -22,7 +22,7 @@ public class LabelStar extends Label implements Comparable<Label>{
 	}
 
 	/* Met à jour le coût */
-	public void setCost(float cout) {
+	public void setCostWithoutInf(float cout) {
 		this.cost = cout - this.inf; // enlève le vol d'oiseau indiqué dans le coût en argument
 	}
 
@@ -33,7 +33,7 @@ public class LabelStar extends Label implements Comparable<Label>{
 
 	/* Renvoie le vrai coût (ie de l'origine au noeud */
 	public float getCostReal() {
-		return this.inf+this.cost;
+		return this.cost;
 	}
 
 }

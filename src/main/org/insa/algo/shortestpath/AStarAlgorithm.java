@@ -60,7 +60,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 			/* On cr�e une copie du Label current en un LabelStar */
 			/* afin de pouvoir appeler par la suite la fonction getCostReal() */
 			LabelStar currentStar = new LabelStar(current.getNode(),data);
-			currentStar.setCost(current.getCost());
+			currentStar.setCostWithoutInf(current.getCost());
 
 			/* Quand on a atteint la destination, on s'arrête */
 			if (current.getNode() == data.getDestination()) {
@@ -94,7 +94,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 				if (!successeurLabel.getMark()) {
 					/* Si on obtient un meilleur coût */
 					/* Alors on le met à jour */
-					if((successeurLabel.getCostReal()>currentStar.getCostReal()+data.getCost(arcIter)) || (successeurLabel.getCost()==Float.POSITIVE_INFINITY)){
+					if((successeurLabel.getCostReal()>currentStar.getCostReal()+data.getCost(arcIter)) || (successeurLabel.getCostReal()==Float.POSITIVE_INFINITY)){
 						successeurLabel.setCost(currentStar.getCostReal()+(float)data.getCost(arcIter));
 						successeurLabel.setFather(current.getNode());
 						/* Si le label est déjà dans le tas */
