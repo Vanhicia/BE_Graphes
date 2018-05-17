@@ -23,6 +23,10 @@ public class LabelStar extends Label implements Comparable<Label>{
 
 		}
 	}
+	
+	public void setCost(float cout) {
+		this.cost = cout - this.inf;
+	}
 
 	public float getCost() {
 		System.out.println("getCostStar !!!!!!!!!!!!!!\n");
@@ -30,9 +34,8 @@ public class LabelStar extends Label implements Comparable<Label>{
 	}
 	
 	public float getCostReal() {
-		System.out.println("getCostReal !!!!!!!!!!!!!!\n");
-		return this.cost;
+		System.out.println("getCostStar !!!!!!!!!!!!!!\n");
+		return this.inf+this.cost;
 	}
-
 
 }
