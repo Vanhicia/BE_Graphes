@@ -124,8 +124,8 @@ public class AStarTest {
 	@Test
 	public void testDoScenarioDistance() throws Exception {
 		System.out.println("testDoScenarioDistance");
-		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
-		String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
 		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
 		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenario(mapName, 1);    	
@@ -135,8 +135,8 @@ public class AStarTest {
 	/*@Test*/
 	public void testDoScenarioDistance1() throws Exception {
 		System.out.println("testDoScenarioDistance");
-		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre.mapgr";
-		String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
 		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
 		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenario(mapName, 1);    	
@@ -146,8 +146,8 @@ public class AStarTest {
 	@Test
 	public void testDoScenarioTemps() throws Exception {
 		System.out.println("testDoScenarioTemps");
-		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
-		String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
 		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
 		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenario(mapName, 0);
@@ -156,8 +156,8 @@ public class AStarTest {
 	@Test
 	public void testDoScenarioDistance2() throws Exception {
 		System.out.println("testDoScenarioDistance2");
-		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-		String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
+		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
 		DijkstraTestWithMap test = new  DijkstraTestWithMap();
 		test.testScenario(mapName, 1);
 	}
@@ -165,8 +165,8 @@ public class AStarTest {
 	@Test
 	public void testDoScenarioTemps2() throws Exception {
 		System.out.println("testDoScenarioTemps2");
-		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-		String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
+		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
 		DijkstraTestWithMap test = new  DijkstraTestWithMap();
 		test.testScenario(mapName, 0);
 	}
@@ -174,8 +174,8 @@ public class AStarTest {
 	@Test
 	public void testDoScenarioMinTempsDist() throws Exception {
 		System.out.println("testDoScenarioMinTempsDist");
-		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
-		String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
 		DijkstraTestWithMap test = new  DijkstraTestWithMap();
 		test.testScenarioSansOracle(mapName);
 	}
@@ -183,8 +183,8 @@ public class AStarTest {
 	@Test
 	public void testDoScenarioMinTempsDist2() throws Exception {
 		System.out.println("testDoScenarioMinTempsDist2");
-		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/midi-pyrenees.mapgr";
-		String mapName = "C:/Users/Alicia/Desktop/Maps/midi-pyrenees.mapgr";
+		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/midi-pyrenees.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/midi-pyrenees.mapgr";
 		DijkstraTestWithMap test = new  DijkstraTestWithMap();
 		test.testScenarioSansOracle(mapName);
 	}
