@@ -9,17 +9,23 @@ import org.insa.algo.ArcInspectorFactory;
 import org.insa.algo.shortestpath.AStarAlgorithm;
 import org.insa.algo.shortestpath.DijkstraAlgorithm;
 import org.insa.algo.shortestpath.ShortestPathData;
-import org.insa.algo.shortestpath.ShortestPathSolution;
 import org.insa.graph.Graph;
 import org.insa.graph.io.BinaryGraphReader;
 import org.insa.graph.io.GraphReader;
 
-public class ResultatPerformanceAlgo {
+public class TempsExecutionAlgos {
+	private int origine;
+	private int destination;
 	private long tempsExecutionDijkstra;
 	private long tempsExecutionAStar;
 	
-	public ResultatPerformanceAlgo(String mapName, int typeEvaluation, int origine, int destination) throws Exception {
-	// Create a graph reader.
+	public TempsExecutionAlgos(String mapName, int typeEvaluation, int origine, int destination) {
+
+		this.origine = origine;
+		this.destination = destination;
+		
+		try {
+			// Create a graph reader.
 			GraphReader reader = new BinaryGraphReader(
 					new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
@@ -41,17 +47,37 @@ public class ResultatPerformanceAlgo {
 
 			long tempsDeb;
 			long tempsFin;
-			
+
 			/* Calcul du temps d'exécution de Dijkstra */
 			tempsDeb = System.currentTimeMillis();
 			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
 			tempsFin = System.currentTimeMillis();
 			this.tempsExecutionDijkstra = tempsFin-tempsDeb;
-			
+
 			/* Calcul du temps d'exécution de Dijkstra */
 			tempsDeb = System.currentTimeMillis();
 			AStarAlgorithm A = new AStarAlgorithm(data);
 			tempsFin = System.currentTimeMillis();
 			this.tempsExecutionAStar = tempsFin-tempsDeb;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public long getTempsExecutionDijkstra() {
+		return this.tempsExecutionDijkstra;
+	}
+	
+	public long getTempsExecutionAStar() {
+		return this.tempsExecutionAStar;
+	}
+	
+	public int getOrigine() {
+		return this.origine;
+	}
+	
+	public int getDestination() {
+		return this.destination;
 	}
 }

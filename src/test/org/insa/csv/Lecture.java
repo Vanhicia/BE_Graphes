@@ -14,7 +14,7 @@ public class Lecture {
 	public Lecture(String fileName) {
 		this.listeOrigine = new ArrayList<Integer>();
 		this.listeDestination = new ArrayList<Integer>();
-		LectureFichier (fileName);
+		this.LectureFichier(fileName);
 	}
 
 	public void LectureFichier (String fileName) {
@@ -42,11 +42,8 @@ public class Lecture {
 			}
 			scan.close();
 		}
-		catch(FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(OddAmountOfPointsException e) {
-			System.out.println(e.getMessage());
+		catch(Exception e) {
+				System.out.println(e.getMessage());
 		}
 	}
 

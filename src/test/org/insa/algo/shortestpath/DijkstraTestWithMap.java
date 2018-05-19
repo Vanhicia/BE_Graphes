@@ -1,13 +1,11 @@
 package org.insa.algo.shortestpath;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
-import java.util.List;
 
 import org.insa.algo.ArcInspector;
 import org.insa.algo.ArcInspectorFactory;
