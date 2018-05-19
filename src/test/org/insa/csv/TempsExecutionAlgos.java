@@ -16,8 +16,10 @@ import org.insa.graph.io.GraphReader;
 public class TempsExecutionAlgos {
 	private int origine;
 	private int destination;
-	private long tempsExecutionDijkstra;
-	private long tempsExecutionAStar;
+	private float tempsExecutionDijkstra;
+	private float tempsExecutionAStar;
+	private	int nbSommetD;
+	private int nbSommetA;
 	
 	public TempsExecutionAlgos(String mapName, int typeEvaluation, int origine, int destination) {
 
@@ -51,25 +53,29 @@ public class TempsExecutionAlgos {
 			/* Calcul du temps d'exécution de Dijkstra */
 			tempsDeb = System.nanoTime();
 			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
+			D.run();
 			tempsFin = System.nanoTime();
-			this.tempsExecutionDijkstra = tempsFin-tempsDeb;
+			this.tempsExecutionDijkstra = (tempsFin-tempsDeb)/1000000.0f;
 
 			/* Calcul du temps d'exécution de Dijkstra */
 			tempsDeb = System.nanoTime();
 			AStarAlgorithm A = new AStarAlgorithm(data);
+			A.run();
 			tempsFin = System.nanoTime();
-			this.tempsExecutionAStar = tempsFin-tempsDeb;
+			this.tempsExecutionAStar = (tempsFin-tempsDeb)/1000000.0f;
 
+			this.nbSommetD=D.getNbSommets();
+			this.nbSommetA=A.getNbSommets();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
-	public long getTempsExecutionDijkstra() {
+	public float getTempsExecutionDijkstra() {
 		return this.tempsExecutionDijkstra;
 	}
 	
-	public long getTempsExecutionAStar() {
+	public float getTempsExecutionAStar() {
 		return this.tempsExecutionAStar;
 	}
 	
@@ -80,4 +86,13 @@ public class TempsExecutionAlgos {
 	public int getDestination() {
 		return this.destination;
 	}
+
+	public int getNbSommetD() {
+		return this.nbSommetD;
+	}
+
+	public int getNbSommetA() {
+		return this.nbSommetA;
+	}
+	
 }

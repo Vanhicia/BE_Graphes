@@ -113,11 +113,14 @@ public class DijkstraTest {
 						/* Affiche le couple (co�t, sommet p�re du Dest) */
 						System.out.print("("+costSolution+ ", x" + (originOfLastArc.getId()+1) + ") ");
 					}
+					
 				}
+
 			}
 
 			/* Retour � la ligne */ 
 			System.out.println("");
+
 		}
 
 	}

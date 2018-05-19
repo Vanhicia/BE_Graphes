@@ -9,8 +9,10 @@ import org.insa.graph.*;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
+	protected int nbSommets;
 	public DijkstraAlgorithm(ShortestPathData data) {
 		super(data);
+		this.nbSommets=0;
 	}
 
 	@Override
@@ -50,6 +52,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 			/* On indique aux observateurs que le Node a été marqué */
 			notifyNodeMarked(current.getNode());
 			current.setMark();
+			this.nbSommets++;
 			/* Quand on a atteint la destination, on s'arrête */
 			if (current.getNode() == data.getDestination()) {
 				fin = true;
@@ -130,5 +133,11 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
 		return solution;
 	}
+
+	public int getNbSommets() {
+		return this.nbSommets;
+	}
+
+
 
 }

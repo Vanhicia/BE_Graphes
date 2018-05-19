@@ -51,7 +51,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 
 		/* Tant qu'il existe des sommets non marqués */
 		while(!tas.isEmpty() && !fin){
-
+			nbSommets++;
 			Label current= tas.deleteMin();
 			/* On indique aux observateurs que le Node a été marqué */
 			notifyNodeMarked(current.getNode());
