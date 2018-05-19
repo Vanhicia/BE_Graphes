@@ -49,15 +49,15 @@ public class TempsExecutionAlgos {
 			long tempsFin;
 
 			/* Calcul du temps d'exécution de Dijkstra */
-			tempsDeb = System.currentTimeMillis();
+			tempsDeb = System.nanoTime();
 			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
-			tempsFin = System.currentTimeMillis();
+			tempsFin = System.nanoTime();
 			this.tempsExecutionDijkstra = tempsFin-tempsDeb;
 
 			/* Calcul du temps d'exécution de Dijkstra */
-			tempsDeb = System.currentTimeMillis();
+			tempsDeb = System.nanoTime();
 			AStarAlgorithm A = new AStarAlgorithm(data);
-			tempsFin = System.currentTimeMillis();
+			tempsFin = System.nanoTime();
 			this.tempsExecutionAStar = tempsFin-tempsDeb;
 
 		} catch (Exception e) {
