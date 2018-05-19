@@ -16,8 +16,8 @@ import org.insa.graph.io.GraphReader;
 public class ResultatExecutionAlgos {
 	private int origine;
 	private int destination;
-	private long tempsExecutionDijkstra;
-	private long tempsExecutionAStar;
+	private float tempsExecutionDijkstra;
+	private float tempsExecutionAStar;
 	private int nbSommetsDijsktra;
 	private int nbSommetsAStar;
 
@@ -52,10 +52,13 @@ public class ResultatExecutionAlgos {
 
 			/* Calcul du temps d'exécution de Dijkstra */
 			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
-			tempsDeb = System.currentTimeMillis();
+			tempsDeb = System.nanoTime();
+			//tempsDeb = System.currentTimeMillis();
 			D.run();
-			tempsFin = System.currentTimeMillis();
-			this.tempsExecutionDijkstra = tempsFin-tempsDeb;
+			//tempsFin = System.currentTimeMillis();
+			tempsFin = System.nanoTime();
+			this.tempsExecutionDijkstra = (tempsFin-tempsDeb)/1000000.0f;
+			//this.tempsExecutionDijkstra = tempsFin-tempsDeb;
 			this.nbSommetsDijsktra = D.getNbSommetsVisites();
 
 			tempsDeb = 0;
@@ -63,10 +66,13 @@ public class ResultatExecutionAlgos {
 			
 			/* Calcul du temps d'exécution d'AStar */
 			AStarAlgorithm A = new AStarAlgorithm(data);
-			tempsDeb = System.currentTimeMillis();
+			//tempsDeb = System.currentTimeMillis();
+			tempsDeb = System.nanoTime();
 			A.run();
-			tempsFin = System.currentTimeMillis();
-			this.tempsExecutionAStar = tempsFin-tempsDeb;
+			tempsFin = System.nanoTime();
+			//tempsFin = System.currentTimeMillis();
+			this.tempsExecutionAStar = (tempsFin-tempsDeb)/1000000.0f;
+			//this.tempsExecutionAStar = tempsFin-tempsDeb;
 			this.nbSommetsAStar = A.getNbSommetsVisites();
 
 			this.nbSommetsDijsktra=D.getNbSommetsVisites();

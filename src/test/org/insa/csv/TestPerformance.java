@@ -29,11 +29,11 @@ public class TestPerformance {
 			//ResultatExecutionAlgos resultat = new ResultatExecutionAlgos(lect.getMapName(), typeEvaluation, origineIter.next(), destinationIter.next());
 
 			this.listeResultatPerformance.add(resultat);
-			System.out.println("Temps execution : Dijkstra = " + resultat.getTempsExecutionDijkstra() + "/ AStar = " + resultat.getTempsExecutionAStar());
-			System.out.println("Nb sommets visités: Dijkstra = " + resultat.getNbSommetsVisitesDijkstra() + " / AStar = " + resultat.getNbSommetsVisitesAStar());
+			//System.out.println("Temps execution : Dijkstra = " + resultat.getTempsExecutionDijkstra() + "/ AStar = " + resultat.getTempsExecutionAStar());
+			//System.out.println("Nb sommets visités: Dijkstra = " + resultat.getNbSommetsVisitesDijkstra() + " / AStar = " + resultat.getNbSommetsVisitesAStar());
 		}
 
-		//appel de la classe Ecriture (classe à implémenter) avec en argument fileNameWrit
+	
 		Ecriture write = new Ecriture(fileNameWrite, mapName, this.listeResultatPerformance);
 	}
 
