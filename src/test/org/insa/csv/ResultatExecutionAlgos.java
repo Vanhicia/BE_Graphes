@@ -13,7 +13,7 @@ import org.insa.graph.Graph;
 import org.insa.graph.io.BinaryGraphReader;
 import org.insa.graph.io.GraphReader;
 
-public class TempsExecutionAlgos {
+public class ResultatExecutionAlgos {
 	private int origine;
 	private int destination;
 	private long tempsExecutionDijkstra;
@@ -21,7 +21,7 @@ public class TempsExecutionAlgos {
 	private int nbSommetsDijsktra;
 	private int nbSommetsAStar;
 	
-	public TempsExecutionAlgos(String mapName, int typeEvaluation, int origine, int destination) {
+	public ResultatExecutionAlgos(String mapName, int typeEvaluation, int origine, int destination) {
 
 		this.origine = origine;
 		this.destination = destination;
@@ -61,7 +61,7 @@ public class TempsExecutionAlgos {
 			tempsDeb = 0;
 			tempsFin = 0;
 			
-			/* Calcul du temps d'exécution de Dijkstra */
+			/* Calcul du temps d'exécution d'AStar */
 			AStarAlgorithm A = new AStarAlgorithm(data);
 			tempsDeb = System.currentTimeMillis();
 			A.run();
