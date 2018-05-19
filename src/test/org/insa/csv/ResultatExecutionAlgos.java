@@ -13,15 +13,15 @@ import org.insa.graph.Graph;
 import org.insa.graph.io.BinaryGraphReader;
 import org.insa.graph.io.GraphReader;
 
-public class TempsExecutionAlgos {
+public class ResultatExecutionAlgos {
 	private int origine;
 	private int destination;
-	private float tempsExecutionDijkstra;
-	private float tempsExecutionAStar;
-	private	int nbSommetD;
-	private int nbSommetA;
-	
-	public TempsExecutionAlgos(String mapName, int typeEvaluation, int origine, int destination) {
+	private long tempsExecutionDijkstra;
+	private long tempsExecutionAStar;
+	private int nbSommetsDijsktra;
+	private int nbSommetsAStar;
+
+	public ResultatExecutionAlgos(String mapName, int typeEvaluation, int origine, int destination) {
 
 		this.origine = origine;
 		this.destination = destination;
@@ -51,32 +51,29 @@ public class TempsExecutionAlgos {
 			long tempsFin;
 
 			/* Calcul du temps d'exécution de Dijkstra */
-			tempsDeb = System.nanoTime();
 			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
+			tempsDeb = System.currentTimeMillis();
 			D.run();
-			tempsFin = System.nanoTime();
-			this.tempsExecutionDijkstra = (tempsFin-tempsDeb)/1000000.0f;
+			tempsFin = System.currentTimeMillis();
+			this.tempsExecutionDijkstra = tempsFin-tempsDeb;
+			this.nbSommetsDijsktra = D.getNbSommetsVisites();
 
-			/* Calcul du temps d'exécution de Dijkstra */
-			tempsDeb = System.nanoTime();
+			tempsDeb = 0;
+			tempsFin = 0;
+			
+			/* Calcul du temps d'exécution d'AStar */
 			AStarAlgorithm A = new AStarAlgorithm(data);
+			tempsDeb = System.currentTimeMillis();
 			A.run();
-			tempsFin = System.nanoTime();
-			this.tempsExecutionAStar = (tempsFin-tempsDeb)/1000000.0f;
+			tempsFin = System.currentTimeMillis();
+			this.tempsExecutionAStar = tempsFin-tempsDeb;
+			this.nbSommetsAStar = A.getNbSommetsVisites();
 
-			this.nbSommetD=D.getNbSommets();
-			this.nbSommetA=A.getNbSommets();
+			this.nbSommetsDijsktra=D.getNbSommetsVisites();
+			this.nbSommetsAStar=A.getNbSommetsVisites();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	}
-	
-	public float getTempsExecutionDijkstra() {
-		return this.tempsExecutionDijkstra;
-	}
-	
-	public float getTempsExecutionAStar() {
-		return this.tempsExecutionAStar;
 	}
 	
 	public int getOrigine() {
@@ -86,13 +83,22 @@ public class TempsExecutionAlgos {
 	public int getDestination() {
 		return this.destination;
 	}
+	
+	public float getTempsExecutionDijkstra() {
 
-	public int getNbSommetD() {
-		return this.nbSommetD;
-	}
-
-	public int getNbSommetA() {
-		return this.nbSommetA;
+		return this.tempsExecutionDijkstra;
 	}
 	
+	public float getTempsExecutionAStar() {
+		return this.tempsExecutionAStar;
+	}
+	
+	public int getNbSommetsVisitesDijkstra() {
+		return this.nbSommetsDijsktra;
+	}
+	
+	public int getNbSommetsVisitesAStar() {
+		return this.nbSommetsAStar;
+	}
+
 }

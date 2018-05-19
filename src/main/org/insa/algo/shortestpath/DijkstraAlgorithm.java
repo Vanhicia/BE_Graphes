@@ -8,11 +8,12 @@ import org.insa.algo.utils.*;
 import org.insa.graph.*;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
+	protected int nbSommetsVisites;
 
 	protected int nbSommets;
 	public DijkstraAlgorithm(ShortestPathData data) {
 		super(data);
-		this.nbSommets=0;
+		this.nbSommetsVisites = 0;
 	}
 
 	@Override
@@ -79,6 +80,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 					notifyNodeReached(arcIter.getDestination());
 					successeurLabel = new Label(successeur);
 					tabLabels[successeurLabel.getNode().getId()] = successeurLabel;
+					/* On incrémente le nombre de sommets visités pour le test de performance */
+					this.nbSommetsVisites++;
 				}
 
 				/* Si le successeur n'est pas encore marqué */
@@ -133,11 +136,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
 		return solution;
 	}
-
-	public int getNbSommets() {
-		return this.nbSommets;
+	
+	public int getNbSommetsVisites() {
+		return this.nbSommetsVisites;
 	}
-
-
 
 }
