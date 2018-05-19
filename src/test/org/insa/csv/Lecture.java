@@ -37,12 +37,15 @@ public class Lecture {
 					this.listeDestination.add(destination);
 				} 
 				else {
-					System.out.println("[WARNING]: Nombre impair de points");
+					throw new OddAmountOfPointsException("le fichier contient un nombre impair de points");
 				}
 			}
 			scan.close();
 		}
 		catch(FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		catch(OddAmountOfPointsException e) {
 			System.out.println(e.getMessage());
 		}
 	}
