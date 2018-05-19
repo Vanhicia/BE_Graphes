@@ -88,6 +88,8 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 					notifyNodeReached(arcIter.getDestination());
 					successeurLabel = new LabelStar(successeur, data);
 					tabLabels[successeurLabel.getNode().getId()] = successeurLabel;
+					/* On incrémente le nombre de sommets visités pour le test de performance */
+					this.nbSommetsVisites++;
 				}
 
 				/* Si le successeur n'est pas encore marqué */

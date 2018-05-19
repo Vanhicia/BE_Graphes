@@ -18,6 +18,8 @@ public class TempsExecutionAlgos {
 	private int destination;
 	private long tempsExecutionDijkstra;
 	private long tempsExecutionAStar;
+	private int nbSommetsDijsktra;
+	private int nbSommetsAStar;
 	
 	public TempsExecutionAlgos(String mapName, int typeEvaluation, int origine, int destination) {
 
@@ -49,20 +51,35 @@ public class TempsExecutionAlgos {
 			long tempsFin;
 
 			/* Calcul du temps d'exécution de Dijkstra */
-			tempsDeb = System.nanoTime();
 			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
-			tempsFin = System.nanoTime();
+			tempsDeb = System.currentTimeMillis();
+			D.run();
+			tempsFin = System.currentTimeMillis();
 			this.tempsExecutionDijkstra = tempsFin-tempsDeb;
+			this.nbSommetsDijsktra = D.getNbSommetsVisites();
 
+			tempsDeb = 0;
+			tempsFin = 0;
+			
 			/* Calcul du temps d'exécution de Dijkstra */
-			tempsDeb = System.nanoTime();
 			AStarAlgorithm A = new AStarAlgorithm(data);
-			tempsFin = System.nanoTime();
+			tempsDeb = System.currentTimeMillis();
+			A.run();
+			tempsFin = System.currentTimeMillis();
 			this.tempsExecutionAStar = tempsFin-tempsDeb;
+			this.nbSommetsAStar = A.getNbSommetsVisites();
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	public int getOrigine() {
+		return this.origine;
+	}
+	
+	public int getDestination() {
+		return this.destination;
 	}
 	
 	public long getTempsExecutionDijkstra() {
@@ -73,11 +90,13 @@ public class TempsExecutionAlgos {
 		return this.tempsExecutionAStar;
 	}
 	
-	public int getOrigine() {
-		return this.origine;
+	public int getNbSommetsVisitesDijkstra() {
+		return this.nbSommetsDijsktra;
 	}
 	
-	public int getDestination() {
-		return this.destination;
+	public int getNbSommetsVisitesAStar() {
+		return this.nbSommetsAStar;
 	}
+	
+	
 }

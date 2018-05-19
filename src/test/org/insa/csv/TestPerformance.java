@@ -25,6 +25,8 @@ public class TestPerformance {
 		while(origineIter.hasNext()) {
 			TempsExecutionAlgos resultat = new TempsExecutionAlgos(lect.getMapName(), typeEvaluation, origineIter.next(), destinationIter.next());
 			this.listeResultatPerformance.add(resultat);
+			System.out.println("Temps execution : Dijkstra = " + resultat.getTempsExecutionDijkstra() + "/ AStar = " + resultat.getTempsExecutionAStar());
+			System.out.println("Nb sommets visités: Dijkstra = " + resultat.getNbSommetsVisitesDijkstra() + " / AStar = " + resultat.getNbSommetsVisitesAStar());
 		}
 
 		//appel de la classe Ecriture (classe à implémenter) avec en argument fileNameWrit
