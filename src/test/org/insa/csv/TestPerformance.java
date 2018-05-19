@@ -6,10 +6,10 @@ import java.util.Iterator;
 import org.junit.*;
 
 public class TestPerformance {
-	private ArrayList<TempsExecutionAlgos> listeResultatPerformance;
+	private ArrayList<ResultatExecutionAlgos> listeResultatPerformance;
 
 	public TestPerformance() {
-		this.listeResultatPerformance = new ArrayList<TempsExecutionAlgos>();
+		this.listeResultatPerformance = new ArrayList<ResultatExecutionAlgos>();
 	}
 
 	public void doRun(String fileNameRead, String fileNameWrit, int typeEvaluation) {
@@ -23,7 +23,7 @@ public class TestPerformance {
 
 
 		while(origineIter.hasNext()) {
-			TempsExecutionAlgos resultat = new TempsExecutionAlgos(lect.getMapName(), typeEvaluation, origineIter.next(), destinationIter.next());
+			ResultatExecutionAlgos resultat = new ResultatExecutionAlgos(lect.getMapName(), typeEvaluation, origineIter.next(), destinationIter.next());
 			this.listeResultatPerformance.add(resultat);
 			System.out.println("Temps execution : Dijkstra = " + resultat.getTempsExecutionDijkstra() + "/ AStar = " + resultat.getTempsExecutionAStar());
 			System.out.println("Nb sommets visités: Dijkstra = " + resultat.getNbSommetsVisitesDijkstra() + " / AStar = " + resultat.getNbSommetsVisitesAStar());
