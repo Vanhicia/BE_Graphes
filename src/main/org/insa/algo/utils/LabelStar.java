@@ -1,7 +1,6 @@
 package org.insa.algo.utils;
 
 import org.insa.algo.shortestpath.ShortestPathData;
-import org.insa.graph.GraphStatistics;
 import org.insa.graph.Node;
 import org.insa.graph.Point;
 import org.insa.algo.AbstractInputData;
@@ -21,23 +20,10 @@ public class LabelStar extends Label implements Comparable<Label>{
 		}
 	}
 
-	/* Met à jour le coût */
-	public void setCostWithoutInf(float cout) {
-		this.cost = cout - this.inf; // enlève le vol d'oiseau indiqué dans le coût en argument
-	}
-
-	/* Renvoie le coût avec le vol d'oiseau jusqu'à la destination */
-	public float getCost() {
+	@Override
+	/* Renvoie le coût de l'origine jusqu'au noeud + coût à vol d'oiseau du noeud jusqu'à la destination */
+	public float getTotalCost() {
 		return this.inf+this.cost;
-	}
-
-	/* Renvoie le vrai coût (ie de l'origine au noeud) */
-	public float getCostReal() {
-		return this.cost;
-	}
-	
-	public float getInf() {
-		return this.inf;
 	}
 
 }

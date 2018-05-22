@@ -4,10 +4,10 @@ import org.insa.graph.Node;
 
 public class Label implements Comparable<Label> {
 	protected float cost;
-	private boolean marked;
+	private boolean marked; // vrai si le noeud a été marqué
 	private Node father;
 	private Node node;
-	private boolean inTas;
+	private boolean inTas; // vrai si le noeud a été mis dans le tas
 	
 	public Label(Node noeud){
 		this.node = noeud;
@@ -25,6 +25,11 @@ public class Label implements Comparable<Label> {
 		return this.cost;
 	}
 	
+	public float getTotalCost() {
+		return this.cost;
+	}
+	
+	/* Retourne true si le noeud a été marqué */
 	public boolean getMark() {
 		return this.marked;
 	}
@@ -33,6 +38,7 @@ public class Label implements Comparable<Label> {
 		return this.father;
 	}
 	
+	/* Retourne true si le noeud a été mis dans le tas */
 	public boolean getInTas() {
 		return this.inTas;
 	}	
@@ -56,10 +62,10 @@ public class Label implements Comparable<Label> {
 	/* Compare les Labels selon leur coût */
 	public int compareTo(Label autre) {
 		int resultat;
-		if (this.getCost() < autre.getCost()) {
+		if (this.getTotalCost() < autre.getTotalCost()) {
 			resultat = -1;
 		}
-		else if (this.getCost() == autre.getCost()) {
+		else if (this.getTotalCost() == autre.getTotalCost()) {
 			resultat = 0;
 		}
 		else {

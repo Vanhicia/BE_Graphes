@@ -37,7 +37,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
 
 		/* Ajout du sommet de départ */
-		Label deb = new Label(data.getOrigin());
+		Label deb = newLabel(data.getOrigin(), data);
 		tabLabels[deb.getNode().getId()] = deb;
 		tas.insert(deb);
 		deb.setInTas();
@@ -53,7 +53,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 			/* On indique aux observateurs que le Node a été marqué */
 			notifyNodeMarked(current.getNode());
 			current.setMark();
-			this.nbSommets++;
 			/* Quand on a atteint la destination, on s'arrête */
 			if (current.getNode() == data.getDestination()) {
 				fin = true;
@@ -78,7 +77,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 				if (successeurLabel == null) {
 					/* On informe les observateurs que l'on atteint un Node pour la première fois */
 					notifyNodeReached(arcIter.getDestination());
-					successeurLabel = new Label(successeur);
+					successeurLabel = newLabel(successeur, data);
 					tabLabels[successeurLabel.getNode().getId()] = successeurLabel;
 					/* On incrémente le nombre de sommets visités pour le test de performance */
 					this.nbSommetsVisites++;
@@ -89,7 +88,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 					/* Si on obtient un meilleur coût */
 					/* Alors on le met à jour */
 
-					if((successeurLabel.getCost()>current.getCost()+data.getCost(arcIter))|| (successeurLabel.getCost()==Float.POSITIVE_INFINITY)){
+					if((successeurLabel.getTotalCost()>(current.getCost()+data.getCost(arcIter)+(successeurLabel.getTotalCost()-successeurLabel.getCost())))|| (successeurLabel.getCost()==Float.POSITIVE_INFINITY)){
 						successeurLabel.setCost(current.getCost()+(float)data.getCost(arcIter));
 						successeurLabel.setFather(current.getNode());
 						/* Si le label est déjà dans le tas */
@@ -135,6 +134,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 		}
 
 		return solution;
+	}
+	
+	protected Label newLabel(Node node, ShortestPathData data) {
+		return new Label(node);
 	}
 	
 	public int getNbSommetsVisites() {
