@@ -17,6 +17,7 @@ public class TestPerformance {
 	public void doRun(String fileNameRead, String fileNameWrite, int typeEvaluation) {
 		//Lecture lect = new Lecture("/home/katran/Bureau/Maison/Graphes/BE_Graphes/input/haute-garonne.txt");
 		//Lecture lect = new Lecture("C:/Users/Utilisateur/Desktop/BE_Graphes/input/haute-garonne.txt");
+		
 		Lecture lect = new Lecture(fileNameRead);
 
 		String mapName = lect.getMapName();
@@ -43,7 +44,8 @@ public class TestPerformance {
 	public void testLecture() {
 		//Lecture lect = new Lecture("/home/katran/Bureau/Maison/Graphes/BE_Graphes/input/haute-garonne.txt");
 		//Lecture lect = new Lecture("C:/Users/Alicia/eclipse-workspace/BE_Graphes/input/haute-garonne.txt");
-		Lecture lect = new Lecture("C:/Users/Utilisateur/Desktop/BE_Graphes/input/haute-garonne.txt");
+		//Lecture lect = new Lecture("C:/Users/Utilisateur/Desktop/BE_Graphes/input/haute-garonne.txt");
+		Lecture lect = new Lecture("C:/Users/Utilisateur/Desktop/BE_Graphes/input/bretagne_15_25.txt");
 		System.out.println("la carte : "+lect.getMapName());
 		System.out.println("1ère origine : "+lect.getListeOrigine().get(0));
 	}
