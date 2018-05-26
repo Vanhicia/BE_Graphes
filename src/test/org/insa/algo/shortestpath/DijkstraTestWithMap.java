@@ -14,9 +14,7 @@ import org.insa.graph.Graph;
 import org.insa.graph.Node;
 import org.insa.graph.Path;
 import org.insa.graph.io.BinaryGraphReader;
-import org.insa.graph.io.BinaryPathReader;
 import org.insa.graph.io.GraphReader;
-import org.insa.graph.io.PathReader;
 
 import org.junit.Test;
 
