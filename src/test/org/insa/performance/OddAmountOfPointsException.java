@@ -1,4 +1,4 @@
-package org.insa.csv;
+package org.insa.performance;
 
 public class OddAmountOfPointsException extends Exception {
 	public OddAmountOfPointsException (String e) {
