@@ -9,10 +9,7 @@ import java.io.FileInputStream;
 
 import org.insa.algo.ArcInspector;
 import org.insa.algo.ArcInspectorFactory;
-import org.insa.graph.Arc;
 import org.insa.graph.Graph;
-import org.insa.graph.Node;
-import org.insa.graph.Path;
 import org.insa.graph.io.BinaryGraphReader;
 import org.insa.graph.io.GraphReader;
 
@@ -22,92 +19,156 @@ public class DijkstraTestWithMap {
 
 	@Test
 	// typeEvaluation : 0 = temps, 1 = distance
-	public void testScenario(String mapName, int typeEvaluation) throws Exception {
+	public void testScenario(String mapName, int typeEvaluation, int origine, int destination) throws Exception {
 		//public void testScenario(String mapName, int typeEvaluation, Node origine, Node destination) throws Exception {
 
 		// Create a graph reader.
-		GraphReader reader = new BinaryGraphReader(
-				new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
+		GraphReader reader = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
 		// Read the graph.
 		Graph graph = reader.read();
 
-		if (typeEvaluation == 0) {
-			System.out.println("type d'evaluation: temps");
+		if (typeEvaluation!=0 && typeEvaluation!=1) {
+			System.out.println("Argument invalide");
+		} else {
+			if (origine<0 || destination<0 || origine>=(graph.size()-1) || destination>=(graph.size()-1)) { // On est hors du graphe. / Sommets inexistants
+				System.out.println("ERREUR : Paramètres invalides ");
+				
+			} else {
+				ArcInspector arcInspectorDijkstra;
+				
+				if (typeEvaluation == 0) { //Temps
+					System.out.println("Mode : Temps");
+					arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
+				} else {
+					System.out.println("Mode : Distance");
+					arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
+				}
+				
+				
+				//System.out.println("Chemin de la carte : "+mapName);
+				System.out.println("Origine : " + origine);
+				System.out.println("Destination : " + destination);
+				
+				if(origine==destination) {
+					System.out.println("Origine et Destination identiques");
+					System.out.println("Cout solution: 0");
+					
+				} else {			
+					ShortestPathData data = new ShortestPathData(graph, graph.get(origine),graph.get(destination), arcInspectorDijkstra);
+		
+					BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
+					DijkstraAlgorithm D = new DijkstraAlgorithm(data);
+					
+					// Recuperation des solutions de Bellman et Dijkstra pour comparer 
+					ShortestPathSolution solution = D.run();
+					ShortestPathSolution expected = B.run();
+	
+					
+					if (solution.getPath() == null) {
+						assertEquals(expected.getPath(), solution.getPath());
+						System.out.println("PAS DE SOLUTION");
+						System.out.println("(infini) ");
+					}
+					// Un plus court chemin trouve 
+					else {
+						double costSolution;
+						double costExpected;
+						if(typeEvaluation == 0) { //Temps
+							//Calcul du cout de la solution 
+							costSolution = solution.getPath().getMinimumTravelTime();
+							costExpected = expected.getPath().getMinimumTravelTime();
+						} else {
+							costSolution = solution.getPath().getLength();
+							costExpected = expected.getPath().getLength();
+						}
+						assertEquals(costExpected, costSolution, 0.001);
+						System.out.println("Cout solution: " + costSolution);
+					}
+				}
+			}
+		}
+/*		if (typeEvaluation == 0) {
+			//System.out.println("type d'evaluation: temps");
 
 
 			ArcInspector arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
 
 
-			ShortestPathData data = new ShortestPathData(graph, graph.get(0),graph.get(graph.size()-1), arcInspectorDijkstra);
+			ShortestPathData data = new ShortestPathData(graph, graph.get(origine),graph.get(destination), arcInspectorDijkstra);
 
 			BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
 			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
 
-			/* Recuperation des solutions de Bellman et Dijkstra pour comparer */
+			// Recuperation des solutions de Bellman et Dijkstra pour comparer 
 			ShortestPathSolution solution = D.run();
 			ShortestPathSolution expected = B.run();
 
 			System.out.println(mapName);
-			/*System.out.println("origine : " + origine);
-			System.out.println("destination : " + destination);*/
-			System.out.println("origine : " + graph.get(0));
-			System.out.println("destination : " + graph.get(graph.size()-1));
+			System.out.println("origine : " + origine);
+			System.out.println("destination : " + destination);
+			System.out.println("origine : " + graph.get(origine));
+			System.out.println("destination : " + graph.get(destination));
 
-			/* Pas de chemin trouve */
+			// Pas de chemin trouve 
 			if (solution.getPath() == null) {
 				assertEquals(expected.getPath(), solution.getPath());
 				System.out.print("(infini) ");
 			}
-			/* Un plus court chemin trouve */
+			// Un plus court chemin trouve 
 			else {
-				/* Calcul du cout de la solution */
+				// Calcul du cout de la solution 
 				double costSolution = solution.getPath().getMinimumTravelTime();
 				double costExpected = expected.getPath().getMinimumTravelTime();
+				
 				assertEquals(costExpected, costSolution, 0.001);
 
-				System.out.println("cout solution: " + costSolution);
+				System.out.println("Cout solution: " + costSolution);
 			}
 		}			
 		else if (typeEvaluation == 1) {
-			System.out.println("type d'evaluation: distance");
+			//System.out.println("type d'evaluation: distance");
 
 			ArcInspector arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
 
-			ShortestPathData data = new ShortestPathData(graph, graph.get(0),graph.get(graph.size()-1), arcInspectorDijkstra);
+			ShortestPathData data = new ShortestPathData(graph, graph.get(origine),graph.get(destination), arcInspectorDijkstra);
 
 			BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
 			DijkstraAlgorithm D = new DijkstraAlgorithm(data);
 
-			/* Recuperation des solutions de Bellman et Dijkstra pour comparer */
+			//Recuperation des solutions de Bellman et Dijkstra pour comparer 
 			ShortestPathSolution solution = D.run();
 			ShortestPathSolution expected = B.run();
 
-			System.out.println(mapName);
-			/*System.out.println("origine : " + origine);
-			System.out.println("destination : " + destination);*/
-			System.out.println("origine : " + graph.get(0));
-			System.out.println("destination : " + graph.get(graph.size()-1));
+			//System.out.println(mapName);
+			System.out.println("Origine : " + origine);
+			System.out.println("Destination : " + destination);
+			System.out.println("origine : " + origine);
+			System.out.println("destination : " + destination);
+			System.out.println("origine : " + graph.get(origine));
+			System.out.println("destination : " + graph.get(destination));
 
-			/* Pas de chemin trouve */
+			// Pas de chemin trouve 
 			if (solution.getPath() == null) {
 				assertEquals(expected.getPath(), solution.getPath());
-				System.out.print("(infini) ");
+				System.out.println("PAS DE SOLUTION TROUVEE");
+				System.out.print("Cout solution: (infini) ");
 			}
-			/* Un plus court chemin trouve */
+			// Un plus court chemin trouve 
 			else {				
-				/* Calcul du cout de la solution */
+				//Calcul du cout de la solution 
 				float costSolution = solution.getPath().getLength();
 				float costExpected = expected.getPath().getLength();
 				assertEquals(costExpected, costSolution, 0.001);
 
-				System.out.println("cout solution: " + costSolution);
+				System.out.println("Cout solution: " + costSolution);
 			}
 		}
 		else {
 			System.out.println("Argument invalide");
-		}
-		System.out.println("");
+		}*/
+		System.out.println();
+		System.out.println();
 	}
 
 
