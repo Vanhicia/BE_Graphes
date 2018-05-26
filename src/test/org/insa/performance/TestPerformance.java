@@ -26,7 +26,7 @@ public class TestPerformance {
 
 
 		while(origineIter.hasNext()) {
-			ResultatExecutionAlgos  resultat = new ResultatExecutionAlgos ("C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr", typeEvaluation, origineIter.next(), destinationIter.next());
+			ResultatExecutionAlgos  resultat = new ResultatExecutionAlgos ("C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/bretagne.mapgr", typeEvaluation, origineIter.next(), destinationIter.next());
 			//ResultatExecutionAlgos resultat = new ResultatExecutionAlgos(lect.getMapName(), typeEvaluation, origineIter.next(), destinationIter.next());
 
 			this.listeResultatPerformance.add(resultat);
