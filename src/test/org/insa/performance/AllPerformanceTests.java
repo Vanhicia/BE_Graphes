@@ -1,4 +1,4 @@
-package org.insa.csv;
+package org.insa.performance;
 
 import org.junit.Test;
 

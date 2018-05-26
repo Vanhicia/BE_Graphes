@@ -1,7 +1,8 @@
-package org.insa.csv;
+package org.insa.performance;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
-import java.io.*;
+
 public class Ecriture {
  public Ecriture(String fileNameWrite, String mapName, ArrayList<ResultatExecutionAlgos>listeResultatPerformance) {
 	 String commaDelimiter = ",";

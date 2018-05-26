@@ -1,9 +1,10 @@
-package org.insa.csv;
+package org.insa.performance;
 
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.junit.*;
+
+import org.junit.Test;
 
 public class TestPerformance {
 	private ArrayList<ResultatExecutionAlgos> listeResultatPerformance;

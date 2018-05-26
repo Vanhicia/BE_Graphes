@@ -1,4 +1,4 @@
-package org.insa.csv;
+package org.insa.performance;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;

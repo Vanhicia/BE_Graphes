@@ -1,7 +1,8 @@
-package org.insa.csv;
+package org.insa.performance;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /* Permet de récupérer les informations d'un fichier .txt : */
 /* Nom de la carte, liste des origines, liste des destinations */
