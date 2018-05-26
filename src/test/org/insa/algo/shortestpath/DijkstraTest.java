@@ -413,7 +413,7 @@ public class DijkstraTest {
 
 	}
 
-	//@Test
+	@Test
 	public void testDoScenarioMinTempsDistHG() throws Exception {
 		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
 		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
@@ -476,10 +476,34 @@ public class DijkstraTest {
 
 		System.out.println("----- Cas d'un chemin simple ------");
 		origine = 0;
-		destination = 204097;
+		destination = 100052;
 		test.testScenarioSansOracle(mapName,origine,destination);    
 	}
 	
+	@Test
+	public void testDoScenarioMinTempsDistGuadeloupe() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/guadeloupe.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/guadeloupe.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/guadeloupe.mapgr";
+
+		DijkstraTestWithMap test = new  DijkstraTestWithMap();
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : GUADELOUPE ----------------------------######");
+		System.out.println();
+	
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 9922;
+		destination = 34328;
+		test.testScenarioSansOracle(mapName,origine,destination);    	
+	
+		System.out.println("----- Cas de sommets non connexes ------");
+		origine = 9950;
+		destination = 15860;
+		test.testScenarioSansOracle(mapName,origine,destination);    
+	}
 	
 
 }

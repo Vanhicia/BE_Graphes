@@ -178,10 +178,10 @@ public class DijkstraTestWithMap {
 	/* Et verifie que la distance du chemin le plus rapide est superieur a la distance du chemin le plus court */
 	public void testScenarioSansOracle(String mapName, int origine, int destination) throws Exception {
 
-		double costFastestSolutionInTime =-1f;
-		double costFastestSolutionInDistance = -1f;
-		double costShortestSolutionInTime = -1f;
-		double costShortestSolutionInDistance = -1f;
+		double costFastestSolutionInTime = Double.POSITIVE_INFINITY;
+		double costFastestSolutionInDistance = Double.POSITIVE_INFINITY;
+		double costShortestSolutionInTime = Double.POSITIVE_INFINITY;
+		double costShortestSolutionInDistance = Double.POSITIVE_INFINITY;
 
 		// Create a graph reader.
 		GraphReader reader = new BinaryGraphReader(
@@ -215,7 +215,7 @@ public class DijkstraTestWithMap {
 		
 				/* Pas de chemin trouve */
 				if (solution.getPath() == null) {
-					System.out.print("(infini) ");
+					System.out.println("PAS DE CHEMIN SOLUTION EN TEMPS");
 				}
 				/* Un plus court chemin trouve */
 				else {
@@ -238,7 +238,7 @@ public class DijkstraTestWithMap {
 	
 				/* Pas de chemin trouve */
 				if (solution.getPath() == null) {
-					System.out.print("(infini) ");
+					System.out.println("PAS DE CHEMIN SOLUTION EN DISTANCE");
 				}
 				/* Un plus court chemin trouve */
 				else {				
@@ -250,13 +250,13 @@ public class DijkstraTestWithMap {
 			
 				/* Verifie que le temps du chemin le plus rapide est inferieur au temps du chemin le plus court */
 				assertTrue(costFastestSolutionInTime <= costShortestSolutionInTime);
-				System.out.println("cout en temps du chemin le plus rapide : " + costFastestSolutionInTime);
-				System.out.println("cout en temps du chemin le plus court  : " + costShortestSolutionInTime);
+				System.out.println("Cout en temps du chemin le plus rapide : " + costFastestSolutionInTime);
+				System.out.println("Cout en temps du chemin le plus court  : " + costShortestSolutionInTime);
 		
 				/* Et verifie que la distance du chemin le plus rapide est superieur a la distance du chemin le plus court */
 				assertTrue(costFastestSolutionInDistance >= costShortestSolutionInDistance);
-				System.out.println("cout en distance du chemin le plus rapide : " + costFastestSolutionInDistance);
-				System.out.println("cout en distance du chemin le plus court : " + costShortestSolutionInDistance);
+				System.out.println("Cout en distance du chemin le plus rapide : " + costFastestSolutionInDistance);
+				System.out.println("Cout en distance du chemin le plus court  : " + costShortestSolutionInDistance);
 	
 			}
 		}
