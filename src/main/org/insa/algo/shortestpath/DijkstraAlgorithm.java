@@ -9,8 +9,8 @@ import org.insa.graph.*;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 	protected int nbSommetsVisites;
-
 	protected int nbSommets;
+	
 	public DijkstraAlgorithm(ShortestPathData data) {
 		super(data);
 		this.nbSommetsVisites = 0;
@@ -136,10 +136,12 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 		return solution;
 	}
 	
+	/* Crée et retourne le Label correspondant au Node */
 	protected Label newLabel(Node node, ShortestPathData data) {
 		return new Label(node);
 	}
 	
+	/* Retourne le nombre de sommets visités */
 	public int getNbSommetsVisites() {
 		return this.nbSommetsVisites;
 	}
