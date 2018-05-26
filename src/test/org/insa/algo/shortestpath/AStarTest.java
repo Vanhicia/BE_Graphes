@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.insa.algo.ArcInspector;
 import org.insa.algo.ArcInspectorFactory;
-import org.insa.algo.shortestpath.BellmanFordAlgorithm;
 import org.insa.algo.shortestpath.DijkstraAlgorithm;
 import org.insa.algo.shortestpath.ShortestPathData;
 import org.insa.algo.shortestpath.ShortestPathSolution;

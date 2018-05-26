@@ -12,7 +12,6 @@ import org.insa.algo.shortestpath.BellmanFordAlgorithm;
 import org.insa.algo.shortestpath.DijkstraAlgorithm;
 import org.insa.algo.shortestpath.ShortestPathData;
 import org.insa.algo.shortestpath.ShortestPathSolution;
-import org.insa.algo.utils.ArcInspectorDijkstra;
 import org.insa.graph.Arc;
 import org.insa.graph.Graph;
 import org.insa.graph.Node;

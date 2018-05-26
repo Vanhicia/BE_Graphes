@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 
 import org.insa.algo.ArcInspector;
 import org.insa.algo.ArcInspectorFactory;
-import org.insa.algo.utils.ArcInspectorDijkstra;
 import org.insa.graph.Arc;
 import org.insa.graph.Graph;
 import org.insa.graph.Node;
