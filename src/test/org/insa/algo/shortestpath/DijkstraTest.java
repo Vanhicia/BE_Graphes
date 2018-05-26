@@ -414,23 +414,72 @@ public class DijkstraTest {
 	}
 
 	//@Test
-	public void testDoScenarioMinTempsDist() throws Exception {
-		System.out.println("testDoScenarioMinTempsDist");
-		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+	public void testDoScenarioMinTempsDistHG() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
 		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
-		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+		
 		DijkstraTestWithMap test = new  DijkstraTestWithMap();
-		test.testScenarioSansOracle(mapName);
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité sans oracle sur une carte-----######");
+		System.out.println("#####----- Carte : Haute-Garonne -------------------------######");
+		System.out.println();
+
+		System.out.println("----- Cas d'un chemin nul ------");
+		origine = 0 ;
+		destination = 0;
+		test.testScenarioSansOracle(mapName,origine,destination);   
+		
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 38926;
+		destination = 59015;
+		test.testScenarioSansOracle(mapName,origine,destination);    	
+	
+		
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : Existe ------------");
+		origine = -1;
+		destination = 59015;
+		test.testScenarioSansOracle(mapName,origine,destination);   	
+
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : Existe ----------------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = 38926;
+		destination = 200000;
+		test.testScenarioSansOracle(mapName,origine,destination);    	
+		
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = -1;
+		destination = 200000; 
+		test.testScenarioSansOracle(mapName,origine,destination);   
 	}
 
-	//@Test
-	public void testDoScenarioMinTempsDist2() throws Exception {
-		System.out.println("testDoScenarioMinTempsDist2");
-		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/midi-pyrenees.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/midi-pyrenees.mapgr";
-		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+	@Test
+	public void testDoScenarioMinTempsDistCarreDense() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre-dense.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/carre-dense.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/carre-dense.mapgr";
+		
 		DijkstraTestWithMap test = new  DijkstraTestWithMap();
-		test.testScenarioSansOracle(mapName);
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité sans oracle sur une carte-----######");
+		System.out.println("#####----- Carte : CARRE DENSE ---------------------------######");
+		System.out.println();
+
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 0;
+		destination = 204097;
+		test.testScenarioSansOracle(mapName,origine,destination);    
 	}
+	
+	
 
 }

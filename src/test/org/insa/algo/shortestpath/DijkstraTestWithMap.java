@@ -23,7 +23,8 @@ public class DijkstraTestWithMap {
 		//public void testScenario(String mapName, int typeEvaluation, Node origine, Node destination) throws Exception {
 
 		// Create a graph reader.
-		GraphReader reader = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
+		GraphReader reader = new BinaryGraphReader(
+				new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
 		// Read the graph.
 		Graph graph = reader.read();
@@ -175,10 +176,9 @@ public class DijkstraTestWithMap {
 	@Test
 	/* Verifie que le temps du chemin le plus rapide est inferieur au temps du chemin le plus court */
 	/* Et verifie que la distance du chemin le plus rapide est superieur a la distance du chemin le plus court */
-	public void testScenarioSansOracle(String mapName) throws Exception {
-		//public void testScenario(String mapName, int typeEvaluation, Node origine, Node destination) throws Exception {
+	public void testScenarioSansOracle(String mapName, int origine, int destination) throws Exception {
 
-		double costFastestSolutionInTime = -1f;
+		double costFastestSolutionInTime =-1f;
 		double costFastestSolutionInDistance = -1f;
 		double costShortestSolutionInTime = -1f;
 		double costShortestSolutionInDistance = -1f;
@@ -190,76 +190,77 @@ public class DijkstraTestWithMap {
 		// Read the graph.
 		Graph graph = reader.read();
 
-		/** Recherche du chemin le plus rapide **/
-
-		System.out.println("type d'evaluation: temps");
-
-		ArcInspector arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
-
-		ShortestPathData data = new ShortestPathData(graph, graph.get(0),graph.get(graph.size()-1), arcInspectorDijkstra);
-
-		DijkstraAlgorithm D = new DijkstraAlgorithm(data);
-
-		/* Recuperation de la solution de Dijkstra */
-		ShortestPathSolution solution = D.run();
-
-		System.out.println(mapName);
-		/*System.out.println("origine : " + origine);
-			System.out.println("destination : " + destination);*/
-		System.out.println("origine : " + graph.get(0));
-		System.out.println("destination : " + graph.get(graph.size()-1));
-
-		/* Pas de chemin trouve */
-		if (solution.getPath() == null) {
-			System.out.print("(infini) ");
+		if (origine<0 || destination<0 || origine>=(graph.size()-1) || destination>=(graph.size()-1)) { // On est hors du graphe. / Sommets inexistants
+			System.out.println("ERREUR : Paramètres invalides ");
+			
+		} else {
+			System.out.println("Origine : " + origine);
+			System.out.println("Destination : " + destination);
+			
+			if(origine==destination) {
+				System.out.println("Origine et Destination identiques");
+				System.out.println("Tous les couts sont à 0.");
+				
+			} else {
+		
+				/** Recherche du chemin le plus rapide **/
+				ArcInspector arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
+		
+				ShortestPathData data = new ShortestPathData(graph, graph.get(origine),graph.get(destination), arcInspectorDijkstra);
+		
+				DijkstraAlgorithm D = new DijkstraAlgorithm(data);
+		
+				/* Recuperation de la solution de Dijkstra */
+				ShortestPathSolution solution = D.run();
+		
+				/* Pas de chemin trouve */
+				if (solution.getPath() == null) {
+					System.out.print("(infini) ");
+				}
+				/* Un plus court chemin trouve */
+				else {
+					/* Calcul du cout de la solution (en temps et en distance) */
+					costFastestSolutionInTime = solution.getPath().getMinimumTravelTime();
+					costFastestSolutionInDistance = solution.getPath().getLength();
+				}
+		
+		
+				/** Recherche du chemin le plus court **/
+		
+				arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
+		
+				data = new ShortestPathData(graph, graph.get(origine),graph.get(destination), arcInspectorDijkstra);
+		
+				D = new DijkstraAlgorithm(data);
+		
+				/* Recuperation de la solution de Dijkstra */
+				solution = D.run();
+	
+				/* Pas de chemin trouve */
+				if (solution.getPath() == null) {
+					System.out.print("(infini) ");
+				}
+				/* Un plus court chemin trouve */
+				else {				
+					/* Calcul du cout de la solution (en temps et en distance) */
+					costShortestSolutionInTime = solution.getPath().getMinimumTravelTime();
+					costShortestSolutionInDistance = solution.getPath().getLength();
+				}
+			
+			
+				/* Verifie que le temps du chemin le plus rapide est inferieur au temps du chemin le plus court */
+				assertTrue(costFastestSolutionInTime <= costShortestSolutionInTime);
+				System.out.println("cout en temps du chemin le plus rapide : " + costFastestSolutionInTime);
+				System.out.println("cout en temps du chemin le plus court  : " + costShortestSolutionInTime);
+		
+				/* Et verifie que la distance du chemin le plus rapide est superieur a la distance du chemin le plus court */
+				assertTrue(costFastestSolutionInDistance >= costShortestSolutionInDistance);
+				System.out.println("cout en distance du chemin le plus rapide : " + costFastestSolutionInDistance);
+				System.out.println("cout en distance du chemin le plus court : " + costShortestSolutionInDistance);
+	
+			}
 		}
-		/* Un plus court chemin trouve */
-		else {
-			/* Calcul du cout de la solution (en temps et en distance) */
-			costFastestSolutionInTime = solution.getPath().getMinimumTravelTime();
-			costFastestSolutionInDistance = solution.getPath().getLength();
-		}
-
-
-		/** Recherche du chemin le plus court **/
-
-		arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
-
-		data = new ShortestPathData(graph, graph.get(0),graph.get(graph.size()-1), arcInspectorDijkstra);
-
-		D = new DijkstraAlgorithm(data);
-
-		/* Recuperation de la solution de Dijkstra */
-		solution = D.run();
-
-		System.out.println(mapName);
-		/*System.out.println("origine : " + origine);
-			System.out.println("destination : " + destination);*/
-		System.out.println("origine : " + graph.get(0));
-		System.out.println("destination : " + graph.get(graph.size()-1));
-
-		/* Pas de chemin trouve */
-		if (solution.getPath() == null) {
-			System.out.print("(infini) ");
-		}
-		/* Un plus court chemin trouve */
-		else {				
-			/* Calcul du cout de la solution (en temps et en distance) */
-			costShortestSolutionInTime = solution.getPath().getMinimumTravelTime();
-			costShortestSolutionInDistance = solution.getPath().getLength();
-		}
-
-		/* Verifie que le temps du chemin le plus rapide est inferieur au temps du chemin le plus court */
-		assertTrue(costFastestSolutionInTime <= costShortestSolutionInTime);
-		System.out.println("cout en temps du chemin le plus rapide : " + costFastestSolutionInTime);
-		System.out.println("cout en temps du chemin le plus court : " + costShortestSolutionInTime);
-
-		/* Et verifie que la distance du chemin le plus rapide est superieur a la distance du chemin le plus court */
-		assertTrue(costFastestSolutionInDistance >= costShortestSolutionInDistance);
-		System.out.println("cout en distance du chemin le plus rapide : " + costFastestSolutionInDistance);
-		System.out.println("cout en distance du chemin le plus court : " + costShortestSolutionInDistance);
-
-		System.out.println("");
-
+		System.out.println();
+		System.out.println();
 	}
 }
