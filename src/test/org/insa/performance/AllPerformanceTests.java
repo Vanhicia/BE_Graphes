@@ -22,7 +22,7 @@ public class AllPerformanceTests {
 		test3Temps.doRun("C:/Users/Utilisateur/Desktop/BE_Graphes/input/bretagne_150_170.txt", "resultat_performance_bretagne_150_170_temps.csv", 0);
 		
 		TestPerformance test3Distance = new TestPerformance();
-		test3Distance.doRun("C:/Users/Utilisateur/Desktop/BE_Graphes/input/bretagne_150_170.txt", "resultat_performance_bretagne_150_170_distance.csv", 1);
-	}*/
+		test3Distance.doRun("C:/Users/Utilisateur/Desktop/BE_Graphes/input/bretagne_150_170.txt", "resultat_performance_bretagne_150_170_distance.csv", 1);*/
+	}
 
 }
