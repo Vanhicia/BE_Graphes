@@ -118,10 +118,10 @@ public class DijkstraTest {
 			}
 
 			/* Retour � la ligne */ 
-			System.out.println("");
+			System.out.println();
 
 		}
-		System.out.println("");
+		System.out.println();
 	}
 
 	//@Test

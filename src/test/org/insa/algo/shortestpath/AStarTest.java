@@ -1,192 +1,392 @@
 package org.insa.algo.shortestpath;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
-import org.insa.algo.ArcInspector;
-import org.insa.algo.ArcInspectorFactory;
-import org.insa.algo.shortestpath.DijkstraAlgorithm;
-import org.insa.algo.shortestpath.ShortestPathData;
-import org.insa.algo.shortestpath.ShortestPathSolution;
-import org.insa.graph.Arc;
-import org.insa.graph.Graph;
-import org.insa.graph.Node;
-import org.insa.graph.RoadInformation;
-import org.insa.graph.RoadInformation.RoadType;
-
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AStarTest {
 
-	// Small graph use for tests
-	private static Graph graph;
+	@Test
+	public void testDoScenarioDistanceHG() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+		
+		AStarTestWithMap test = new  AStarTestWithMap();
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : Haute-Garonne -------------------------######");
+		System.out.println("#####----- Mode : DISTANCE -------------------------------######");
+		System.out.println();
+		
+		System.out.println("----- Cas d'un chemin nul ------");
+		origine = 0 ;
+		destination = 0;
+		test.testScenario(mapName, 1,origine,destination);    
+		
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 38926;
+		destination = 59015;
+		test.testScenario(mapName, 1,origine,destination);    	
+	
+		
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : Existe ------------");
+		origine = -1;
+		destination = 59015;
+		test.testScenario(mapName, 1,origine,destination);    	
 
-	// List of nodes
-	private static Node[] nodes;
-
-	// List of arcs in the graph, a2b is the arc from node A (0) to B (1).
-	@SuppressWarnings("unused")
-	private static Arc a2b, a2c, b2d, b2e, b2f, c2a, c2b, c2f, e2c, e2d, e2f, f2e;
-
-	@BeforeClass
-	public static void initAll() throws IOException {
-
-		// Define roads
-		RoadInformation RoadInfo = new RoadInformation(RoadType.UNCLASSIFIED, null, true, 1, null);
-
-		// Create nodes
-		nodes = new Node[6];
-		for (int i = 0; i < nodes.length; ++i) {
-			nodes[i] = new Node(i, null);
-		}
-
-		// Add arcs...
-		a2b = Node.linkNodes(nodes[0], nodes[1], 7, RoadInfo, null);
-		a2c = Node.linkNodes(nodes[0], nodes[2], 8, RoadInfo, null);
-		b2d = Node.linkNodes(nodes[1], nodes[3], 4, RoadInfo, null);
-		b2e = Node.linkNodes(nodes[1], nodes[4], 1, RoadInfo, null);
-		b2f = Node.linkNodes(nodes[1], nodes[5], 5, RoadInfo, null);
-		c2a = Node.linkNodes(nodes[2], nodes[0], 7, RoadInfo, null);
-		c2b = Node.linkNodes(nodes[2], nodes[1], 2, RoadInfo, null);
-		c2f = Node.linkNodes(nodes[2], nodes[5], 2, RoadInfo, null);
-		e2c = Node.linkNodes(nodes[4], nodes[2], 2, RoadInfo, null);
-		e2d = Node.linkNodes(nodes[4], nodes[3], 2, RoadInfo, null);
-		e2f = Node.linkNodes(nodes[4], nodes[5], 3, RoadInfo, null);
-		f2e = Node.linkNodes(nodes[5], nodes[4], 3, RoadInfo, null);
-
-		// Initialize the graph
-		graph = new Graph("ID", "", Arrays.asList(nodes), null);
-
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : Existe ----------------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = 38926;
+		destination = 200000;
+		test.testScenario(mapName, 1,origine,destination);    	
+		
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = -1;
+		destination = 200000;
+		test.testScenario(mapName, 1,origine,destination);    	
 	}
 
-	//@Test
-	public void testDoRun() {
+	
+	@Test
+	public void testDoScenarioTempsHG() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
 
-		/* Tableau contenant les arcs*/
-		//Arc[] arcs = new Arc[] { a2b, a2c, b2d, b2e, b2f, c2a, c2b, c2f, e2c, e2d, e2f, f2e };
+		AStarTestWithMap test = new  AStarTestWithMap();
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : Haute-Garonne -------------------------######");
+		System.out.println("#####----- Mode : TEMPS ----------------------------------######");
+		System.out.println();
+		
+		System.out.println("----- Cas d'un chemin nul ------");
+		origine = 0 ;
+		destination = 0;
+		test.testScenario(mapName, 0,origine,destination);    
+		
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 38926;
+		destination = 59015;
+		test.testScenario(mapName, 0,origine,destination);    	
+	
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : Existe ------------");
+		origine = -1;
+		destination = 59015;
+		test.testScenario(mapName, 0,origine,destination);    	
 
-		for (int i=0;  i < nodes.length; ++i) {
-
-			/* Affichage du point de dï¿½part */
-			System.out.print("x"+(nodes[i].getId()+1) + ":");
-
-			for (int j=0;  j < nodes.length; ++j) {
-
-				if(nodes[i]==nodes[j]) {
-					System.out.print("- ");
-				}
-				else{
-
-					ArcInspector arcInspectorDijkstra = new ArcInspectorFactory().getAllFilters().get(0);
-					ShortestPathData data = new ShortestPathData(graph, nodes[i],nodes[j], arcInspectorDijkstra);
-
-					AStarAlgorithm A = new AStarAlgorithm(data);
-					DijkstraAlgorithm D = new DijkstraAlgorithm(data);
-
-					/* Rï¿½cupï¿½ration des solutions de Bellman et Dijkstra pour comparer */
-					ShortestPathSolution solution = A.run();
-					ShortestPathSolution expected = D.run();
-
-					/* Pas de chemin trouvï¿½ */
-					if (solution.getPath() == null) {
-						assertEquals(expected.getPath(), solution.getPath());
-						System.out.print("(infini) ");
-					}
-					/* Un plus court chemin trouvï¿½ */
-					else {
-
-						/* Calcul du coï¿½t de la solution */
-						float costSolution = solution.getPath().getLength();
-						float costExpected = expected.getPath().getLength();
-						assertEquals(costExpected, costSolution, 0);
-
-						/* On rï¿½cupï¿½re l'avant dernier sommet du chemin de la solution (=sommet pï¿½re de la destination) */
-						List<Arc> arcs = solution.getPath().getArcs();
-						Node originOfLastArc = arcs.get(arcs.size()-1).getOrigin();
-
-						/* Affiche le couple (coï¿½t, sommet pï¿½re du Dest) */
-						System.out.print("("+costSolution+ ", x" + (originOfLastArc.getId()+1) + ") ");
-					}
-				}
-			}
-
-			/* Retour ï¿½ la ligne */ 
-			System.out.println("");
-		}
-
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : Existe ----------------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = 38926;
+		destination = 200000;
+		test.testScenario(mapName, 0,origine,destination);    	
+		
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = -1;
+		destination = 200000;
+		test.testScenario(mapName, 0,origine,destination);    	
 	}
 
 	@Test
-	public void testDoScenarioDistance() throws Exception {
-		System.out.println("testDoScenarioDistance");
-		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
-		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+	public void testDoScenarioDistanceINSA() throws Exception {
+
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/insa.mapgr";
+
 		AStarTestWithMap test = new  AStarTestWithMap();
-		test.testScenario(mapName, 1);    	
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : INSA ----------------------------------######");
+		System.out.println("#####----- Mode : DISTANCE -------------------------------######");
+		System.out.println();
+		
+		System.out.println("----- Cas d'un chemin nul ------");
+		origine = 300 ;
+		destination = 300;
+		test.testScenario(mapName, 1,origine,destination);    
+		
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 607;
+		destination = 857;
+		test.testScenario(mapName, 1,origine,destination);    	
+	
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : Existe ------------");
+		origine = 2000;
+		destination = 857;
+		test.testScenario(mapName, 1,origine,destination);    	
+
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : Existe ----------------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = 607;
+		destination = 200000;
+		test.testScenario(mapName, 1,origine,destination);    	
+		
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = 2000;
+		destination = 2000;
+		test.testScenario(mapName, 1,origine,destination);   
+	}
+
+	@Test
+	public void testDoScenarioTempsINSA() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/insa.mapgr";
+
+		AStarTestWithMap test = new  AStarTestWithMap();
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : INSA ----------------------------------######");
+		System.out.println("#####----- Mode : TEMPS ----------------------------------######");
+		System.out.println();
+		
+		System.out.println("----- Cas d'un chemin nul ------");
+		origine = 300 ;
+		destination = 300;
+		test.testScenario(mapName, 0,origine,destination);    
+		
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 607;
+		destination = 857;
+		test.testScenario(mapName, 0,origine,destination);    	
+	
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : Existe ------------");
+		origine = 2000;
+		destination = 857;
+		test.testScenario(mapName, 0,origine,destination);    	
+
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : Existe ----------------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = 607;
+		destination = 200000;
+		test.testScenario(mapName, 0,origine,destination);    	
+		
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = 2000;
+		destination = 2000;
+		test.testScenario(mapName, 0,origine,destination);   
+	}
+	
+	@Test
+	public void testDoScenarioDistanceCarreDense() throws Exception {
+
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre-dense.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/carre-dense.mapgrr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/carre-dense.mapgr";
+
+		AStarTestWithMap test = new  AStarTestWithMap();
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : CARRE DENSE ---------------------------######");
+		System.out.println("#####----- Mode : DISTANCE -------------------------------######");
+		System.out.println();
+		
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 0;
+		destination = 204097;
+		test.testScenario(mapName, 1,origine,destination);    		
+	}
+
+	@Test
+	public void testDoScenarioTempsCarreDense() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre-dense.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/carre-dense.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/carre-dense.mapgr";
+
+		AStarTestWithMap test = new  AStarTestWithMap();
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : CARRE DENSE ---------------------------######");
+		System.out.println("#####----- Mode : TEMPS -------------------------------######");
+		System.out.println();
+
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 0;
+		destination = 204097;
+		test.testScenario(mapName, 0,origine,destination);    			
+	}
+	
+	
+	@Test
+	public void testDoScenarioDistanceGuadeloupe() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/guadeloupe.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/guadeloupe.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/guadeloupe.mapgr";
+
+		AStarTestWithMap test = new  AStarTestWithMap();
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : GUADELOUPE ----------------------------######");
+		System.out.println("#####----- Mode : DISTANCE -------------------------------######");
+		System.out.println();
+	
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 9922;
+		destination = 34328;
+		test.testScenario(mapName, 1,origine,destination);    	
+	
+		System.out.println("----- Cas de sommets non connexes ------");
+		origine = 9950;
+		destination = 15860;
+		test.testScenario(mapName, 1,origine,destination);    	
 
 	}
 	
-	/*@Test*/
-	public void testDoScenarioDistance1() throws Exception {
-		System.out.println("testDoScenarioDistance");
-		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre.mapgr";
+	@Test
+	public void testDoScenarioTempsGuadeloupe() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/guadeloupe.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/guadeloupe.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/guadeloupe.mapgr";
+
+		AStarTestWithMap test = new  AStarTestWithMap();
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : GUADELOUPE ----------------------------######");
+		System.out.println("#####----- Mode : TEMPS ----------------------------------######");
+		System.out.println();
+	
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 9922;
+		destination = 34328;
+		test.testScenario(mapName, 0,origine,destination);    	
+	
+		System.out.println("----- Cas de sommets non connexes ------");
+		origine = 9950;
+		destination = 15860;
+		test.testScenario(mapName, 0,origine,destination);    	
+
+	}
+
+	@Test
+	public void testDoScenarioMinTempsDistHG() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
 		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
-		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+		
 		AStarTestWithMap test = new  AStarTestWithMap();
-		test.testScenario(mapName, 1);    	
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité sans oracle sur une carte-----######");
+		System.out.println("#####----- Carte : Haute-Garonne -------------------------######");
+		System.out.println();
 
+		System.out.println("----- Cas d'un chemin nul ------");
+		origine = 0 ;
+		destination = 0;
+		test.testScenarioSansOracle(mapName,origine,destination);   
+		
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 38926;
+		destination = 59015;
+		test.testScenarioSansOracle(mapName,origine,destination);    	
+	
+		
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : Existe ------------");
+		origine = -1;
+		destination = 59015;
+		test.testScenarioSansOracle(mapName,origine,destination);   	
+
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : Existe ----------------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = 38926;
+		destination = 200000;
+		test.testScenarioSansOracle(mapName,origine,destination);    	
+		
+		System.out.println("----- Cas de sommets inexistants ------");
+		System.out.println("----- Origine : N'existe pas ----------");
+		System.out.println("----- Destination : N'existe pas ------");
+		origine = -1;
+		destination = 200000; 
+		test.testScenarioSansOracle(mapName,origine,destination);   
 	}
 
 	@Test
-	public void testDoScenarioTemps() throws Exception {
-		System.out.println("testDoScenarioTemps");
-		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
-		//String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/haute-garonne.mapgr";
+	public void testDoScenarioMinTempsDistCarreDense() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre-dense.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/carre-dense.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/carre-dense.mapgr";
+		
 		AStarTestWithMap test = new  AStarTestWithMap();
-		test.testScenario(mapName, 0);
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité sans oracle sur une carte-----######");
+		System.out.println("#####----- Carte : CARRE DENSE ---------------------------######");
+		System.out.println();
+
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 0;
+		destination = 100052;
+		test.testScenarioSansOracle(mapName,origine,destination);    
 	}
+	
 
 	@Test
-	public void testDoScenarioDistance2() throws Exception {
-		System.out.println("testDoScenarioDistance2");
-		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
-		AStarTestWithMap test = new  AStarTestWithMap();
-		test.testScenario(mapName, 1);
-	}
+	public void testDoScenarioMinTempsDistGuadeloupe() throws Exception {
+		//String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/guadeloupe.mapgr";
+		//String mapName = "C:/Users/Alicia/Desktop/Maps/guadeloupe.mapgr";
+		String mapName = "C:/Users/Utilisateur/Desktop/3A MIC/Kimi/graphe/Maps/guadeloupe.mapgr";
 
-	@Test
-	public void testDoScenarioTemps2() throws Exception {
-		System.out.println("testDoScenarioTemps2");
-		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
 		AStarTestWithMap test = new  AStarTestWithMap();
-		test.testScenario(mapName, 0);
-	}
+		int origine;
+		int destination;
+		
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
+		System.out.println("#####----- Carte : GUADELOUPE ----------------------------######");
+		System.out.println();
+	
+		System.out.println("----- Cas d'un chemin simple ------");
+		origine = 9922;
+		destination = 34328;
+		test.testScenarioSansOracle(mapName,origine,destination);    	
+	
+		System.out.println("----- Cas de sommets non connexes ------");
+		origine = 9950;
+		destination = 15860;
+		test.testScenarioSansOracle(mapName,origine,destination);    
 
-	@Test
-	public void testDoScenarioMinTempsDist() throws Exception {
-		System.out.println("testDoScenarioMinTempsDist");
-		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
-		AStarTestWithMap test = new  AStarTestWithMap();
-		test.testScenarioSansOracle(mapName);
 	}
-
-	@Test
-	public void testDoScenarioMinTempsDist2() throws Exception {
-		System.out.println("testDoScenarioMinTempsDist2");
-		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/midi-pyrenees.mapgr";
-		//String mapName = "C:/Users/Alicia/Desktop/Maps/midi-pyrenees.mapgr";
-		AStarTestWithMap test = new  AStarTestWithMap();
-		test.testScenarioSansOracle(mapName);
-	}
+	
 
 }
 
