@@ -157,7 +157,7 @@ public class AStarTest {
 		System.out.println("testDoScenarioDistance2");
 		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
 		//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
-		DijkstraTestWithMap test = new  DijkstraTestWithMap();
+		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenario(mapName, 1);
 	}
 
@@ -166,7 +166,7 @@ public class AStarTest {
 		System.out.println("testDoScenarioTemps2");
 		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
 		//String mapName = "C:/Users/Alicia/Desktop/Maps/insa.mapgr";
-		DijkstraTestWithMap test = new  DijkstraTestWithMap();
+		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenario(mapName, 0);
 	}
 
@@ -175,7 +175,7 @@ public class AStarTest {
 		System.out.println("testDoScenarioMinTempsDist");
 		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
 		//String mapName = "C:/Users/Alicia/Desktop/Maps/haute-garonne.mapgr";
-		DijkstraTestWithMap test = new  DijkstraTestWithMap();
+		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenarioSansOracle(mapName);
 	}
 
@@ -184,7 +184,7 @@ public class AStarTest {
 		System.out.println("testDoScenarioMinTempsDist2");
 		String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/midi-pyrenees.mapgr";
 		//String mapName = "C:/Users/Alicia/Desktop/Maps/midi-pyrenees.mapgr";
-		DijkstraTestWithMap test = new  DijkstraTestWithMap();
+		AStarTestWithMap test = new  AStarTestWithMap();
 		test.testScenarioSansOracle(mapName);
 	}
 
