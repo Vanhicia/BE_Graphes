@@ -66,19 +66,19 @@ public class DijkstraTest {
 
 	//@Test
 	public void testDoRun() {
-		System.out.println("#####-----Test de validit� avec oracle sur un exemple simple-----#####");
+		System.out.println("#####-----Test de validité avec oracle sur un exemple simple-----#####");
 		/* Tableau contenant les arcs*/
 		//Arc[] arcs = new Arc[] { a2b, a2c, b2d, b2e, b2f, c2a, c2b, c2f, e2c, e2d, e2f, f2e };
 
 		for (int i=0;  i < nodes.length; ++i) {
 
-			/* Affichage du point de d�part */
+			/* Affichage du point de départ */
 			System.out.print("x"+(nodes[i].getId()+1) + ":");
 
 			for (int j=0;  j < nodes.length; ++j) {
 
 				if(nodes[i]==nodes[j]) {
-					System.out.print("- ");
+					System.out.print("     -    ");
 				}
 				else{
 
@@ -88,28 +88,28 @@ public class DijkstraTest {
 					BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
 					DijkstraAlgorithm D = new DijkstraAlgorithm(data);
 
-					/* R�cup�ration des solutions de Bellman et Dijkstra pour comparer */
+					/* Récupération des solutions de Bellman et Dijkstra pour comparer */
 					ShortestPathSolution solution = D.run();
 					ShortestPathSolution expected = B.run();
 
-					/* Pas de chemin trouv� */
+					/* Pas de chemin trouvé */
 					if (solution.getPath() == null) {
 						assertEquals(expected.getPath(), solution.getPath());
-						System.out.print("(infini) ");
+						System.out.print("(infini)  ");
 					}
-					/* Un plus court chemin trouv� */
+					/* Un plus court chemin trouvé */
 					else {
 
-						/* Calcul du co�t de la solution */
+						/* Calcul du coût de la solution */
 						float costSolution = solution.getPath().getLength();
 						float costExpected = expected.getPath().getLength();
 						assertEquals(costExpected, costSolution, 0);
 
-						/* On r�cup�re l'avant dernier sommet du chemin de la solution (=sommet p�re de la destination) */
+						/* On récupère l'avant dernier sommet du chemin de la solution (=sommet père de la destination) */
 						List<Arc> arcs = solution.getPath().getArcs();
 						Node originOfLastArc = arcs.get(arcs.size()-1).getOrigin();
 
-						/* Affiche le couple (co�t, sommet p�re du Dest) */
+						/* Affiche le couple (coût, sommet père du Dest) */
 						System.out.print("("+costSolution+ ", x" + (originOfLastArc.getId()+1) + ") ");
 					}
 					
@@ -117,7 +117,7 @@ public class DijkstraTest {
 
 			}
 
-			/* Retour � la ligne */ 
+			/* Retour à la ligne */ 
 			System.out.println();
 
 		}
@@ -134,7 +134,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� avec oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
 		System.out.println("#####----- Carte : Haute-Garonne -------------------------######");
 		System.out.println("#####----- Mode : DISTANCE -------------------------------######");
 		System.out.println();
@@ -183,7 +183,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� avec oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
 		System.out.println("#####----- Carte : Haute-Garonne -------------------------######");
 		System.out.println("#####----- Mode : TEMPS ----------------------------------######");
 		System.out.println();
@@ -231,7 +231,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� avec oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
 		System.out.println("#####----- Carte : INSA ----------------------------------######");
 		System.out.println("#####----- Mode : DISTANCE -------------------------------######");
 		System.out.println();
@@ -278,7 +278,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� avec oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
 		System.out.println("#####----- Carte : INSA ----------------------------------######");
 		System.out.println("#####----- Mode : TEMPS ----------------------------------######");
 		System.out.println();
@@ -326,7 +326,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� avec oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
 		System.out.println("#####----- Carte : CARRE DENSE ---------------------------######");
 		System.out.println("#####----- Mode : DISTANCE -------------------------------######");
 		System.out.println();
@@ -347,7 +347,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� avec oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
 		System.out.println("#####----- Carte : CARRE DENSE ---------------------------######");
 		System.out.println("#####----- Mode : TEMPS -------------------------------######");
 		System.out.println();
@@ -369,7 +369,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� avec oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
 		System.out.println("#####----- Carte : GUADELOUPE ----------------------------######");
 		System.out.println("#####----- Mode : DISTANCE -------------------------------######");
 		System.out.println();
@@ -396,7 +396,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� avec oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité avec oracle sur une carte-----######");
 		System.out.println("#####----- Carte : GUADELOUPE ----------------------------######");
 		System.out.println("#####----- Mode : TEMPS ----------------------------------######");
 		System.out.println();
@@ -423,7 +423,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� sans oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité sans oracle sur une carte-----######");
 		System.out.println("#####----- Carte : Haute-Garonne -------------------------######");
 		System.out.println();
 
@@ -470,7 +470,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� sans oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité sans oracle sur une carte-----######");
 		System.out.println("#####----- Carte : CARRE DENSE ---------------------------######");
 		System.out.println();
 
@@ -490,7 +490,7 @@ public class DijkstraTest {
 		int origine;
 		int destination;
 		
-		System.out.println("#####----- Test de validit� avec oracle sur une carte-----######");
+		System.out.println("#####----- Test de validité sans oracle sur une carte-----######");
 		System.out.println("#####----- Carte : GUADELOUPE ----------------------------######");
 		System.out.println();
 	

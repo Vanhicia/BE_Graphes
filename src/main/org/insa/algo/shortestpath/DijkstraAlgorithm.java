@@ -88,7 +88,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 					/* Si on obtient un meilleur coût */
 					/* Alors on le met à jour */
 
-					if((successeurLabel.getTotalCost()>(current.getCost()+data.getCost(arcIter)+(successeurLabel.getTotalCost()-successeurLabel.getCost())))|| (successeurLabel.getCost()==Float.POSITIVE_INFINITY)){
+					if((successeurLabel.getTotalCost()>(current.getCost()+data.getCost(arcIter)
+						+(successeurLabel.getTotalCost()-successeurLabel.getCost()))) 
+						|| (successeurLabel.getCost()==Float.POSITIVE_INFINITY)){
 						successeurLabel.setCost(current.getCost()+(float)data.getCost(arcIter));
 						successeurLabel.setFather(current.getNode());
 						/* Si le label est déjà dans le tas */
